@@ -1,0 +1,30 @@
+<a class="sidebar-toggle d-flex"><i class="hamburger align-self-center"></i></a>
+<div class="col-sm-7">
+    <input class="form-control" list="searchDataListOptions" id="searchDataList" i18n-attrs='placeholder' lang="en" dir="auto" placeholder="Type to search">
+    <datalist id="searchDataListOptions"></datalist>
+</div>
+<div class="navbar-collapse collapse desktop">
+    <ul class="navbar-nav navbar-align">
+        <li class="nav-item dropdown ms-auto">
+            <a class="nav-link dropdown-toggle d-none d-sm-inline-block" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="language-dropdown">&#127760; <i18n lang="en">Language</i18n></a>
+            <div class="dropdown-menu dropdown-menu-end" id="languages" aria-labelledby="language-dropdown">
+            </div>
+        </li>
+        <li class="nav-item dropdown ms-auto" id="if_signed_out">
+            <a class="nav-link dropdown-toggle d-none d-sm-inline-block" data-bs-toggle="dropdown" href="#" id="signed_out_dropdown"><i18n lang="en">Access</i18n></a>
+            <div class="dropdown-menu dropdown-menu-end" id="signed_out_menu" aria-labelledby="signed_out_dropdown">
+                <a class="dropdown-item" id="signin"><i class="align-middle me-1" data-feather="log-in"></i> <i18n lang="en">Sign In</i18n></a>
+                <a class="dropdown-item" id="signup"><i class="align-middle me-1" data-feather="user-check"></i> <i18n lang="en">Sign Up</i18n></a>
+            </div>
+        </li>
+        <li class="nav-item dropdown ms-auto" id="if_signed_in">
+            <a class="nav-link dropdown-toggle d-none d-sm-inline-block" data-bs-toggle="dropdown" href="#" id="signed_in_dropdown"></a>
+            <div class="dropdown-menu dropdown-menu-end" id="signed_in_menu" aria-labelledby="signed_in_dropdown">
+                <a class="dropdown-item" href="/user/profile"><i class="align-middle me-1" data-feather="user"></i> <i18n lang="en">Profile</i18n></a>
+                <a class="dropdown-item" href="/my-portfolio/my-messages" id="messages"><i class="align-middle me-1" data-feather="send"></i> <i18n lang="en">Messages</i18n></a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#" id="signout"><i class="align-middle me-1" data-feather="log-out"></i><i18n lang="en">Sign Out</i18n></a>
+            </div>
+        </li>
+    </ul>
+</div>

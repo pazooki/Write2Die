@@ -1,0 +1,136 @@
+<div class="row top-bar mobile">
+    <div class="container" id="navigation">
+        <div class="row top-buffer">
+            <div class="col">
+                <div class="btn-group d-grid gap-2">
+                    <a class="btn btn-secondary btn-sm" type="button" subapp="/canada001/home/">
+                        TroutJS <img src="/static/icons/favicon.ico"/> 
+                    </a>
+                </div>
+            </div>
+            <div class="col">
+                <div class="btn-group d-grid gap-2">
+                    <a class="btn btn-secondary btn-sm" type="button" id="navigation-forward">
+                        <i18n lang="en">Forward</i18n>
+                        <i class="bi bi-arrow-90deg-right"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="col">
+                <div class="btn-group d-grid gap-2">
+                    <a class="btn btn-secondary btn-sm" type="button" id="navigation-back">
+                        <i18n lang="en">Back</i18n>
+                        <i class="bi bi-arrow-90deg-left"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    <!-- </div>
+    <div class="container" id="site-settings"> -->
+        <div class="row top-buffer">
+            <div class="col">
+                <div class="btn-group d-grid gap-2">
+                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="menu-dropdown"
+                        aria-expanded="false" data-bs-toggle="dropdown">
+                        <i18n lang="en">Menu</i18n>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-dark text-center" aria-labelledby="menu-dropdown"
+                        id="top-menu">
+                        <a class="dropdown-item" subapp="/canada001/home/"><i class="align-middle me-1"
+                                data-feather="user">
+                                <i18n lang="en">Home</i18n>
+                            </i>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" subapp="/academy/hiring/"><i class="align-middle me-1"
+                                data-feather="user">
+                                <i18n lang="en">Hiring</i18n>
+                            </i>
+                        </a>
+                        <a class="dropdown-item" subapp="/academy/resources/"><i class="align-middle me-1"
+                                data-feather="user">
+                                <i18n lang="en">Resources</i18n>
+                            </i>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" subapp="/market/market-map/"><i class="align-middle me-1"
+                                data-feather="user">
+                                <i18n lang="en">Market Map</i18n>
+                            </i>
+                        </a>
+                        <a class="dropdown-item" subapp="/market/company-profile/"><i class="align-middle me-1"
+                                data-feather="user">
+                                <i18n lang="en">Symbol Profile</i18n>
+                            </i>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" subapp="/my-portfolio/my-subscriptions/"><i class="align-middle me-1"
+                                data-feather="user">
+                                <i18n lang="en">My Subscriptions</i18n>
+                            </i>
+                        </a>
+                        <a class="dropdown-item" subapp="/my-portfolio/my-messages/"><i class="align-middle me-1"
+                                data-feather="user">
+                                <i18n lang="en">My Messages</i18n>
+                            </i>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" subapp="/user/profile/"><i class="align-middle me-1"
+                                data-feather="user">
+                                <i18n lang="en">Profile</i18n>
+                            </i>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+            <div class="col" id="lang-menu">
+                <div class="btn-group d-grid gap-2">
+                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        id="language-dropdown" aria-expanded="false">
+                        &#127760; Language
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="language-dropdown" id="languages"
+                        dir="ltr" lang="en">
+                    </ul>
+                </div>
+            </div>
+            <div class="col" id="if_signed_out">
+                <div class="btn-group d-grid gap-2">
+                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        id="signed_out_dropdown" aria-expanded="false">
+                        <i18n lang="en">Access</i18n>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="signed_out_dropdown">
+                        <a class="dropdown-item" subapp="/user/sign-in/">
+                            <i18n lang="en">Sign In</i18n>
+                        </a>
+                        <a class="dropdown-item" subapp="/user/sign-up/">
+                            <i18n lang="en">Sign Up</i18n>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+            <div class="col" id="if_signed_in">
+                <div class="btn-group d-grid gap-2">
+                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                        id="signed_in_dropdown" aria-expanded="false">
+                        <i18n lang="en">Access</i18n>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="signed_in_dropdown">
+                        <a class="dropdown-item" subapp="/user/profile/">
+                            <i18n lang="en">Profile</i18n>
+                        </a>
+                        <a class="dropdown-item" subapp="/my-portfolio/my-messages/" id="messages">
+                            <i18n lang="en">Messages</i18n>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" id="signout">
+                            <i18n lang="en">Sign Out</i18n>
+                        </a>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content" id="subapp"></div>

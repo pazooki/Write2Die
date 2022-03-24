@@ -1,0 +1,214 @@
+<div class="container-fluid p-0">
+    <div class="row">
+        <div class="col-md-4 col-xl-3">
+            <div class="card mb-3">
+                <div class="card-header">
+                    <h5 class="card-title mb-0" translate="yes"><i18n lang="en">Onboarding Status</i18n></h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-1" id='side-nav-address' translate="yes">
+                            <span class="feather-sm me-1" data-feather="x" id='side-nav-address-icon'></span>&emsp;<i18n lang="en">Address</i18n>
+                        </li>
+                        <li class="mb-1" id='side-nav-gov-id' translate="yes">
+                            <span class="feather-sm me-1" data-feather="x" id='side-nav-gov-id-icon'></span>&emsp;<i18n lang="en">Gov. Documents</i18n>
+                        </li>
+                        <li class="mb-1" id='side-nav-legals' translate="yes">
+                            <span class="feather-sm me-1" data-feather="x" id='side-nav-legals-icon'></span>&emsp;<i18n lang="en">Legal Contract</i18n>
+                        </li>
+                    </ul>
+                </div>
+                <hr class="my-0"/>
+                <div class="card-body">
+                    <h5 class="h6 card-title" translate="yes"><i18n lang="en">Top Tehran Stock Exchange Broker</i18n></h5>
+                    <ul class="list-unstyled mb-0">
+                        <li class="mb-1"><a href="#">TajIran.me</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 col-xl-9">
+            <ul class="nav nav-tabs" id="onboardingTabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" type="button" role="tab"  aria-selected="true" data-bs-toggle="tab" 
+                            id="address-tab" 
+                            data-bs-target="#address-content" 
+                            href="#address-content" 
+                            aria-controls="address-content" translate="yes">
+                            <i18n lang="en">Address</i18n>
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" type="button" role="tab"  aria-selected="true" data-bs-toggle="tab" 
+                            id="gov-documents-tab" 
+                            data-bs-target="#gov-documents-content" 
+                            href="#gov-documents-content" 
+                            aria-controls="gov-documents-content" translate="yes">
+                            <i18n lang="en">Gov. Documents</i18n>
+                    </button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" type="button" role="tab"  aria-selected="true" data-bs-toggle="tab" 
+                            id="legal-contract-tab" 
+                            data-bs-target="#legal-contract-content" 
+                            href="#legal-contract-content" 
+                            aria-controls="legal-contract-content" translate="yes">
+                            <i18n lang="en">Legal Contract</i18n>
+                    </button>
+                </li>
+            </ul>
+            <div class="tab-content" id="onboardingContent">
+                <div class="tab-pane fade show active" id="address-content" role="tabpanel" aria-labelledby="address-tab">
+                    <div class="col-xl-12 col-xxl-12">
+                        <div class="card flex-fill">
+                            <div class="card-header" translate="yes">
+                                <i18n lang="en">Your Address and Contact</i18n>
+                            </div>
+                            <div class="card-body">
+                                <form id="address-form" class="row g-3 needs-validation" novalidate>
+                                    <div class="mb-3 row">
+                                        <label for="address-fullname" class="col-sm-2 col-form-label" translate="yes"><i18n lang="en">Full Name</i18n></label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" id="address-fullname" required>
+                                            <div class="invalid-feedback" translate="yes">
+                                                <i18n lang="en">Enter your full name.</i18n>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="address-phone" class="col-sm-2 col-form-label" translate="yes"><i18n lang="en">Phone</i18n></label>
+                                        <div class="col-sm-4">
+                                            <input type="phone" class="form-control" id="address-phone" required>
+                                            <div class="invalid-feedback" translate="yes">
+                                                <i18n lang="en">Enter your phone number.</i18n>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="address-country" class="col-sm-2 col-form-label" translate="yes"><i18n lang="en">Country</i18n></label>
+                                        <div class="col-sm-6">
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="address-country-flag"></span>
+                                                <input class="form-control" list="countryOptions" id="address-country" aria-describedby="address-country-flag" placeholder="Type to find your country..." required>
+                                                <datalist id="countryOptions"></datalist>
+                                                <div class="invalid-feedback" translate="yes">
+                                                    <i18n lang="en">Enter your country.</i18n>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="address-region" class="col-sm-2 col-form-label" translate="yes"><i18n lang="en">Region</i18n></label>
+                                        <div class="col-sm-6">
+                                            <div class="input-group mb-3">
+                                                <input class="form-control" list="regionOptions" id="address-region" aria-describedby="address-region-flag" placeholder="Type to find your region..." required>
+                                                <datalist id="regionOptions"></datalist>
+                                                <div class="invalid-feedback" translate="yes">
+                                                    <i18n lang="en">Enter your region.</i18n>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="address-city" class="col-sm-2 col-form-label" translate="yes">City</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" id="address-city" required>
+                                            <div class="invalid-feedback" translate="yes">
+                                                <i18n lang="en">Enter your city.</i18n>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="address-street" class="col-sm-2 col-form-label" translate="yes"><i18n lang="en">Street Name</i18n></label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="address-street" required>
+                                            <div class="invalid-feedback" translate="yes">
+                                                <i18n lang="en">Enter your street.</i18n>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3 row">
+                                        <label for="address-postal-code" class="col-sm-2 col-form-label"><i18n lang="en">Postal Code</i18n></label>
+                                        <div class="col-sm-3">
+                                            <input type="text" class="form-control" id="address-postal-code" required>
+                                            <div class="invalid-feedback" translate="yes">
+                                                <i18n lang="en">Enter your postal code.</i18n>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary" id="btn-address-save" translate="yes"><i18n lang="en">Save</i18n></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="gov-documents-content" role="tabpanel" aria-labelledby="gov-documents-tab">
+                    <div class="col-xl-12 col-xxl-12">
+                        <div class="card flex-fill">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <h3 id="gov-id-header" translate="yes"><i18n lang="en">Gov. ID</i18n></h3>
+                                    </div>
+                                    <div class="col-sm-6" style="text-align: right;">
+                                        <h3 id="gov-id-status"></h3>
+                                    </div>
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <input type="file" id="gov-id-files-btn" name="files" multiple="multiple">
+                                    </div>
+                                    <div class="col-sm-6" translate="yes">
+                                        <p><i18n lang="en">Note: Upload at least two valid Gov. ID documents.</i18n></p>
+                                    </div>
+                                </div>
+                                <hr>
+                                    <p translate="yes">Note:&emsp;&emsp;<span data-feather="check" style="color: green"></span> (Approved) &emsp;&emsp; <span data-feather="clock" style="color: orange"></span> (Under Review) &emsp;&emsp; <span data-feather="x" style="color: red"></span> (Rejected)</p>
+                                <hr>
+                                <div id="file-archive"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="legal-contract-content" role="tabpanel" aria-labelledby="legal-contract-tab">
+                    <div class="col-xl-12 col-xxl-12">
+                        <div class="card flex-fill">
+                            <div class="card-body">
+                                <div class="row">
+                                    <label>Contract
+                                        <textarea class="form-control" placeholder="Contract" rows="15" col="50" id="contract-1-text" readonly></textarea>
+                                    </label>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="form-check form-switch">
+                                            <label class="form-check-label" for="contract-1-signature-checked" translate="yes">
+                                                <input class="form-check-input" id="contract-1-signature-checked" type="checkbox">
+                                                <i18n lang="en">Agreed with the contract.</i18n>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label><i18n lang="en">Fullname</i18n>
+                                            <input type="text" name="contract-1-signature-fullname" id="contract-1-signature-fullname">
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <label translate="yes"><i18n lang="en">Date</i18n>
+                                            <input type="text" name="contract-1-signature-date" id="contract-1-signature-date" disabled>
+                                        </label>
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row" style="text-align: center;">
+                                    <button type="button" id="contract-1-signature-btn" translate="yes"><i18n lang="en">Sign & Save</i18n></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
