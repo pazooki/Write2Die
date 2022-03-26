@@ -35,7 +35,7 @@ TroutJS.ready(function () {
             "/home/access/": "access",
 
             "/contents/articles/": "articles",
-            "/contents/corresp/": "corresp",
+            "/contents/corresp/": "Duwells",
             "/contents/podcasts/": "podcasts",
             "/contents/videos/": "videos",
 

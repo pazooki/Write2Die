@@ -13,7 +13,7 @@ export default class Articles {
         return new Promise( 
             resolve => {
                 this.State.Root.Memory.test = 'passed from Articles';
-                alert(this.State.Root.Memory.test);
+                // alert(this.State.Root.Memory.test);
                 return resolve('Successfull Run. App: Articles');
             }, 
             reject => {

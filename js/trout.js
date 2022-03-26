@@ -155,7 +155,10 @@ export class TroutJS extends Trout {
                 imports, 
                 app
             );
-            write2die.State.Root.Services.Session.route({subAppName: app.settings.DefaultSubApp});
+            // see if pathname of url is a valid subapp
+            let _url = new URL(window.location.href);
+
+            write2die.State.Root.Services.Session.route({subAppName: _url.pathname});
         });
     }
 
