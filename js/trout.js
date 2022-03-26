@@ -151,11 +151,11 @@ export class TroutJS extends Trout {
         ]).catch(reason => {
             console.log(reason);
         }).then((imports) => {
-            const mrdpzk = new TroutJS(
+            const write2die = new TroutJS(
                 imports, 
                 app
             );
-            mrdpzk.State.Root.Services.Session.route({subAppName: app.settings.DefaultSubApp});
+            write2die.State.Root.Services.Session.route({subAppName: app.settings.DefaultSubApp});
         });
     }
 

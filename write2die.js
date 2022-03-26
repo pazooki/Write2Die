@@ -6,7 +6,6 @@ TroutJS.ready(function () {
         server:'http://localhost:8080',
 
         settings:{
-            DefaultSubApp: '/home/home/',
             debug: true,
             cache: {
                 enabled: false, 
@@ -29,6 +28,7 @@ TroutJS.ready(function () {
                     'ar': { 'name': 'Arabic', 'code': 'ar', 'flag': '🇮🇶' },
                 }
             },
+            DefaultSubApp: '/home/home/', // TODO: IMPORTANT: All links get redirected to DefaultSubApp
         },
         subapps:{ // "filesystem path": "unique subapp identifier"
             "/home/home/": "home",

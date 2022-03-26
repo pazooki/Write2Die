@@ -189,7 +189,7 @@ export class Trout {
                             document.getElementById(resource.attributes.placementTag).innerHTML = 'Failed To Load This Component';
                             console.log('html tag failed to load: ', reject);
                             console.log('Loading Rejected Resource', resource);
-                            return Promise.reject();//new Error('Failed To Load HTML: ' + resource.route));
+                            return Promise.reject(new Error('Failed To Load HTML: ' + resource.route));
                         }
                     )
                 case 'js':

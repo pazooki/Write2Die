@@ -17,8 +17,13 @@ export class Session {
                         console.log('route.LoadAppModules Completed', results);
                     }
                     this.App.State.Root.TroutModulesLoaded = true;
+                    console.log('TroutModulesLoaded is set to True')
+                    console.log('Going to Run: afterLoadingApp')
                     this.App.afterLoadingApp();
+                    console.log('afterLoadingApp is done.')
+                    console.log('Going to Run: loadSubAppModules')
                     this.App.loadSubAppModules();
+                    console.log('loadSubAppModules is done.')
                 },
                 rejects => {
                     console.log(rejects);

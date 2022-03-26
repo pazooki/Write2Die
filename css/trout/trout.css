@@ -30,6 +30,7 @@
     margin-right: 1rem;
     margin-bottom: 1rem;
     font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
 }
 
 .btn-lg {
