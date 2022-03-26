@@ -35,8 +35,8 @@ TroutJS.ready(function () {
             "/home/access/": "access",
 
             "/contents/articles/": "articles",
-            "/contents/corresp/": "Duwells",
-            "/contents/podcasts/": "podcasts",
+            "/contents/duels/": "duels",
+            "/contents/voices/": "voices",
             "/contents/videos/": "videos",
 
             "/write2die/test-page-1/": "test1",
