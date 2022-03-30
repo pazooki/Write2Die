@@ -125,6 +125,39 @@ export class Component{
         return content;
     }
 
+    addTolistGroupItem = (listGroupId, href, title, published_at, description, subnote, views) => {
+        let listGroup = document.getElementById(listGroupId);
+        let aLink = document.createElement('a');
+        aLink.setAttribute('href', href);
+        aLink.setAttribute('aria-curren', "true");
+        aLink.setAttribute('class', 'list-group-item list-group-item-action');
+
+        let aHeader = document.createElement('div');
+        aHeader.setAttribute('class', "d-flex w-100 justify-content-between");
+        aHeader.setAttribute('aria-current', "true");
+
+        let aHeaderHeader = document.createElement('h5');
+        aHeaderHeader.setAttribute('class', 'mb-1');
+        aHeaderHeader.innerHTML = title;
+
+        let aHeaderpublishedDate = document.createElement('small');
+        aHeaderpublishedDate.innerHTML = published_at; // TODO: Add views
+
+        let description = document.createElement('p');
+        description.setAttribute('class', 'mb-1');
+        description.innerHTML = description;
+
+        let subnote = document.createElement('small');
+        subnote.innerHTML = subnote;
+
+        aHeader.appendChild(aHeaderHeader);
+        aHeader.appendChild(aHeaderpublishedDate);
+        aLink.appendChild(aHeader);
+        aLink.appendChild(description);
+        aLink.appendChild(subnote);
+        listGroup.appendChild(aLink);
+    }
+
     modal = (parentDiv, header, body, actions, modalBodyID) => {
         return this.loadIntoDivFromTemplate(this.State.Routes.Components.modal, parentDiv.id).then(modalTemplate => {
             parentDiv.parentNode.append(modalTemplate);
@@ -288,7 +321,7 @@ export class Component{
 
         var toastHeaderTitle = document.createElement('strong');
         toastHeaderTitle.classList.add('me-auto');
-        toastHeaderTitle.innerHTML = 'Tajiran';
+        toastHeaderTitle.innerHTML = 'Note:';
 
         var toastHeaderTimeAgo = document.createElement('small');
         toastHeaderTimeAgo.innerHTML = this.State.Root.Services.Localization.i18n(jQuery.timeago(new Date().toLocaleString()), 'en');

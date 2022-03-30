@@ -1,0 +1,20 @@
+#!/bin/sh
+
+[Unit]
+Description=gunicorn daemon
+After=network.target
+
+[Service]
+User=mehrdadpazooki
+#scorg
+Group=mehrdadpazooki
+#www-data
+Environment=GOOGLE_APPLICATION_CREDENTIALS=/home/mehrdadpazooki/keys/google-api-key.json
+Environment=PATH="/opt/rh/devtoolset-9/root/usr/bin:$PATH:$JAVA_HOME/bin:/usr/local/lib:/usr/lib64:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/usr/bin/python3:/root/bin:/home/mehrdadpazooki/.local/bin:/home/mehrdadpazooki/bin"
+Environment=LD_LIBRARY_PATH=/usr/local/lib/:/usr/lib64/
+WorkingDirectory=/home/mehrdadpazooki/
+ExecStart=/home/mehrdadpazooki/.venv/bin/gunicorn -b :8181 --chdir /home/mehrdadpazooki/tajiran/backend -k gtornado.TornadoWorker server:tajiran_app --workers=5 --reload --log-level=info --error-logfile=/home/mehrdadpazooki/Tajiran-errors.log --access-logfile /home/mehrdadpazooki/Tajiran-access.log
+
+
+[Install]
+WantedBy=multi-user.target

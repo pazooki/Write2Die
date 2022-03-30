@@ -76,9 +76,8 @@ class Router {
                 signup: { route: this.server('/api/signup/'), auth: false, cache: { validityTime: this.policies.Time.ZERO } },
                 auth: { route: this.server('/api/auth/'), auth: false, cache: { validityTime: this.policies.Time.ZERO } },
                 user: { route: this.server('/api/user/'), auth: true, cache: { validityTime: this.policies.Time.ZERO } },
-                user_address: { route: this.server("/api/user/address"), auth: true, cache: { validityTime: this.policies.Time.ZERO } },
-                user_govid: { route: this.server("/api/user/govid"), auth: true, cache: { validityTime: this.policies.Time.ZERO } },
-                user_contract: { route: this.server("/api/user/contract"), auth: true, cache: { validityTime: this.policies.Time.ZERO } },
+                
+                articles_action: { route: this.server('/api/content/articles/'), auth: false, cache: { validityTime: this.policies.Time.ZERO } },
 
                 // Services
                 service_cache: { route: this.server('/api/services/cache'), auth: false, cache: { validityTime: this.policies.Time.ZERO } },

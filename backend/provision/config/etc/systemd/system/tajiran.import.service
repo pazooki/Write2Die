@@ -1,0 +1,21 @@
+#!/bin/sh
+
+[Unit]
+Description=Tajiran Import Service
+After=network.target
+
+[Service]
+User=mehrdadpazooki
+#scorg
+Group=mehrdadpazooki
+#www-data
+Environment=PYTHONUNBUFFERED=1
+Environment=PYTHONPATH=/home/mehrdadpazooki/tajiran/backend/
+Environment=PATH="/opt/rh/devtoolset-9/root/usr/bin:$PATH:$JAVA_HOME/bin:/usr/local/lib:/usr/lib64:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/usr/bin/python3:/root/bin:/home/mehrdadpazooki/.local/bin:/home/mehrdadpazooki/bin"
+Environment=LD_LIBRARY_PATH=/usr/local/lib/:/usr/lib64/
+WorkingDirectory=/home/mehrdadpazooki/tajiran/backend/
+ExecStart=/home/mehrdadpazooki/.venv/bin/python3 /home/mehrdadpazooki/tajiran/backend/scheduled/tse.py
+TimeoutSec=infinity
+
+[Install]
+WantedBy=multi-user.target

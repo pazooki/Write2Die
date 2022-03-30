@@ -14,7 +14,7 @@ let RootServices = {
     Auth: Auth,
     Network: Network,
     Localization: Localization,
-
+    
     Session: Session,
 
     Component: Component,

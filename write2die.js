@@ -3,7 +3,7 @@ import { TroutJS } from './js/trout.js';
 TroutJS.ready(function () {
     let app = {
         appName: 'write2die',
-        server:'http://localhost:8080',
+        server:'http://localhost',
 
         settings:{
             debug: true,
@@ -28,11 +28,12 @@ TroutJS.ready(function () {
                     'ar': { 'name': 'Arabic', 'code': 'ar', 'flag': '🇮🇶' },
                 }
             },
-            DefaultSubApp: '/home/home/', // TODO: IMPORTANT: All links get redirected to DefaultSubApp
+            DefaultSubApp: '/home/home/',
         },
         subapps:{ // "filesystem path": "unique subapp identifier"
             "/home/home/": "home",
             "/home/access/": "access",
+            "/home/profile/": "profile",
 
             "/contents/articles/": "articles",
             "/contents/duels/": "duels",

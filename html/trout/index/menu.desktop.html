@@ -24,7 +24,8 @@
                 <a class="nav-link m-2 menu-item subapp" subapp="/contents/videos/">Videos</a>
             </li>
             <li class="nav-item">
-                <a subapp="/home/access/" class="nav-link m-2 menu-item btn btn-info btn-sm subapp" tabindex="-1" role="button" aria-disabled="true">Members Acccess</a>
+                <a subapp="/home/access/" class="nav-link m-2 menu-item btn btn-info btn-sm subapp if_signed_out" tabindex="-1" role="button" aria-disabled="true">Members Acccess</a>
+                <a subapp="/home/profile/" class="nav-link m-2 menu-item btn btn-info btn-sm subapp if_signed_in" id="signed_in_user_profile_button" tabindex="-1" role="button" aria-disabled="true"> # TO BE NAME #</a>
             </li>
         </ul>
     </div>

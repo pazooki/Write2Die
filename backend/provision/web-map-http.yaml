@@ -1,0 +1,16 @@
+kind: compute#urlMap
+name: web-map-http
+defaultUrlRedirect:
+   redirectResponseCode: MOVED_PERMANENTLY_DEFAULT
+   httpsRedirect: True
+tests:
+- description: Test with no query parameters
+  host: tajiran.me
+  path: /ping/
+  expectedOutputUrl: https://tajiran.me/ping/
+  expectedRedirectResponseCode: 301
+- description: Test with query parameters
+  host: tajiran.me
+  path: /html/index.html?page=overview&next=sign-up
+  expectedOutputUrl: https://tajiran.me/html/index.html?page=overview&next=sign-up
+  expectedRedirectResponseCode: 301

@@ -10,6 +10,7 @@ export class Cookies{
     }
 
     setCookie = (name, value, days = 3600) => {
+        var date = new Date();
         var expires = "";
         if (days) {
             date.setTime(this.getCookiesExpirationTime(days));

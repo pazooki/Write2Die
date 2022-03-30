@@ -1,0 +1,12 @@
+py-cpuinfo
+pytest>=3.8
+
+[aspect]
+aspectlib
+
+[elasticsearch]
+elasticsearch
+
+[histogram]
+pygal
+pygaljs

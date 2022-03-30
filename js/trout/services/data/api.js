@@ -99,6 +99,7 @@ export class API extends Cache{
                 $.ajax({
                     url: resource.route,
                     type: "POST",
+                    crossDomain: true,
                     dataType: "json",
                     data: JSON.stringify(data),
                     contentType: "application/json; charset=utf-8",
@@ -134,9 +135,6 @@ export class API extends Cache{
 
         console.log('DirectGet: ', routeUrlWithParams)
 
-
-        console.log('loading fuck 1.. ', resource.route)
-
         return new Promise((resolve, reject) => {
             if (resource.auth && that.cookies.getUserUUID() === null) {
                 return reject('Auth Fails: UUID is not available in cookies.');
@@ -160,10 +158,8 @@ export class API extends Cache{
                             console.log('DEBUG:      DirectGet Error: ', 
                             error, error.stack, 
                             XMLHttpRequest.debug, textStatus, errorThrown);
-                            alert('Fucks!!!');
                         }
 
-                        console.log('loading fuck 2.. ', resource.route)
                         return reject(error);
                     }
                 }
@@ -182,14 +178,14 @@ export class API extends Cache{
     }
 
 
-    Post = (resource, data) => {
+    Post = (resource, data, {cacheStorage=null}) => {
         let that = this;
         if (this.State.Settings.cache.enabled && this.State.Settings.cache.localStorage){
             return that.localStorageTryCachedPost(resource, data, that.DirectPost)
         } else if (this.State.Settings.cache.enabled && this.State.Settings.cache.indexedDB) {
             return this.indexedDBTryCachedPost(resource, { urlParams: urlParams, type: type }, that.DirectPost)
         } else {
-            return this.DirectPost(resource, data);
+            return this.DirectPost(resource, data, {cacheStorage: cacheStorage});
         }
     }
 

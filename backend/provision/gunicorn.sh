@@ -1,0 +1,1 @@
+(source .venv/bin/activate; cd tajiran/backend; gunicorn -b :8181 -k gtornado.TornadoWorker server:tajiran_app --workers=1 --reload --log-level=info --error-logfile=/home/mehrdadpazooki/Tajiran-errors.log --access-logfile /home/mehrdadpazooki/Tajiran-access.log &)
