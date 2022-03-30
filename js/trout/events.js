@@ -40,11 +40,11 @@ export class Events {
 
         // Signed In
         if (user !== null && user !== undefined && user.hasOwnProperty('fullname')){
-            for (let signedOutObj of ifSignedOutObjects){
+            for (var signedOutObj of ifSignedOutObjects){
                 signedOutObj.parentNode.removeChild(signedOutObj);
             }
 
-            for (let signedInObj of ifSignedInObjects){
+            for (var signedInObj of ifSignedInObjects){
                 signedInObj.style.visibility = 'visible';
             }
 
@@ -52,11 +52,11 @@ export class Events {
             profile_btn.innerHTML = user.fullname;
 
         } else { // Not Signed In
-            for (let signedInObj of ifSignedInObjects){
+            for (var signedInObj of ifSignedInObjects){
                 signedInObj.parentNode.removeChild(signedInObj);
             }
 
-            for (let signedOutObj of ifSignedOutObjects){
+            for (var signedOutObj of ifSignedOutObjects){
                 signedOutObj.style.visibility = 'visible';
             }
         }

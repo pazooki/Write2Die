@@ -125,7 +125,7 @@ export class Component{
         return content;
     }
 
-    addTolistGroupItem = (listGroupId, href, title, published_at, description, subnote, views) => {
+    addTolistGroupItem = (listGroupId, href, title, published_at, desc_value, subnote_value, views) => {
         let listGroup = document.getElementById(listGroupId);
         let aLink = document.createElement('a');
         aLink.setAttribute('href', href);
@@ -143,17 +143,17 @@ export class Component{
         let aHeaderpublishedDate = document.createElement('small');
         aHeaderpublishedDate.innerHTML = published_at; // TODO: Add views
 
-        let description = document.createElement('p');
-        description.setAttribute('class', 'mb-1');
-        description.innerHTML = description;
+        let short_desc = document.createElement('p');
+        short_desc.setAttribute('class', 'mb-1');
+        short_desc.innerHTML = desc_value;
 
         let subnote = document.createElement('small');
-        subnote.innerHTML = subnote;
+        subnote.innerHTML = subnote_value;
 
         aHeader.appendChild(aHeaderHeader);
         aHeader.appendChild(aHeaderpublishedDate);
         aLink.appendChild(aHeader);
-        aLink.appendChild(description);
+        aLink.appendChild(short_desc);
         aLink.appendChild(subnote);
         listGroup.appendChild(aLink);
     }

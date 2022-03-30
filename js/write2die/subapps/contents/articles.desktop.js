@@ -38,7 +38,7 @@ export default class Articles {
         return {
             'title': document.getElementById('article_title'),
             'published_at': document.getElementById('article_published_at'),
-            'short_desc': document.getElementById('article_description'),
+            'short_desc': document.getElementById('article_short_desc'),
             'subnote': document.getElementById('article_subnote')
         }
     }

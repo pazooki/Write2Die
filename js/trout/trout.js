@@ -225,6 +225,7 @@ export class Trout {
         return Promise.all(imports).then(
             modules => {
                 var appModules = {};
+                console.log(modules);
                 for (let _exports of modules) {
                     for (let _export of Object.keys(_exports)) {
                         let moduleName = _export;
@@ -236,9 +237,9 @@ export class Trout {
                 console.log('Loaded App Modules:', appModules);
                 return Promise.resolve(appModules);
             },
-            rejects => {
-                console.log('Failed To Load App Modules:', imports, rejects);
-                return Promise.reject(new Error(rejects));
+            rejected => {
+                console.log('Failed To Load App Modules:', imports, rejected);
+                return Promise.reject(new Error(rejected));
             }
         )
     }
