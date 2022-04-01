@@ -164,7 +164,7 @@ class Router {
     }
 
     SubAppModule = (subAppPath, device) => {
-        console.log('subAppPath: ', subAppPath, subAppPath.replace(/\/$/, ""));
+        console.log('subAppPath: ', subAppPath, device, '/js/' + this.AppPathName + '/subapps' + subAppPath.replace(/\/$/, "") + '.' + device + '.js');
         return { route: '/js/' + this.AppPathName + '/subapps' + subAppPath.replace(/\/$/, "") + '.' + device + '.js', cache: { validityTime: this.policies.Time.ZERO } }
     }
 }

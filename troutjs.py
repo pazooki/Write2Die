@@ -53,11 +53,18 @@ class Config:
             if path.startswith('/'):
                 path = path[1:-1]
             js_file = Path(self.home_path).joinpath('js/').joinpath(self.config.get('appName')).joinpath('subapps').joinpath(Path(path))
-            if js_file.exists():
-                print('Already exists.', str(js_file), uname)
+            css_file = Path(self.home_path).joinpath('css/').joinpath('subapps').joinpath(Path(path))
+            html_file = Path(self.home_path).joinpath(' /').joinpath('subapps').joinpath(Path(path))
+            
+            if js_file.exists() or css_file.exists() or html_file.exists():
+                print(path, uname)
+                print('Already exists.', [str(js_file),], uname)
+                print('Already exists.', [str(html_file),], uname)
+                print('Already exists.', [str(css_file),], uname)
+                print('+'*100)
             else:
-                print('Creating SubApp For: .', str(js_file), uname)
-                self.add_directory(path, uname)
+                print('Creating SubApp For: .', [str(js_file), str(html_file), str(css_file)], uname)
+                # self.add_directory(path, uname)
             
 
 

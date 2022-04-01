@@ -30,6 +30,9 @@
         "/home/home/": "home",
         "/home/access/": "access",
         "/home/profile/": "profile",
+        
+        "/contents/articles/get/": "articles.get",
+        "/contents/articles/post/": "articles.post",
 
         "/contents/duels/get/": "duels.get",
         "/contents/duels/post/": "duels.post",
@@ -40,8 +43,6 @@
         "/contents/videos/get/": "videos.get",
         "/contents/videos/post/": "videos.post",
 
-        "/contents/articles/post/": "articles.post",
-        "/contents/articles/get/": "articles.get",
 
         "/invalid/invalid/": "invalid"
         
