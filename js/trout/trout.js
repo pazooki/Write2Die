@@ -14,7 +14,7 @@ export class Trout {
                     Device: 'Desktop',
                     CurrentSession: {
                         URL: null,
-                        SubApp: '/home/',
+                        SubApp: '/home/home/',
                         TS: 0,
                     },
                     RegisteredAppEvents: {},
@@ -144,7 +144,7 @@ export class Trout {
         console.log('Loading Resources:', this.State.Root.AppName);
         // Load App Level Resources
         // Default SubApp Path 
-        // [/css/subapps/<subapp-name>/<sub-app>.css,Services /js/subapps/<subapp-name>/<sub-app>.js, /html/subapps/<subapp-name>/<sub-app>.html]
+        // [/css/subapps/<subapp-name>/<sub-app>.css, /js/subapps/<subapp-name>/<sub-app>.js, /html/subapps/<subapp-name>/<sub-app>.html]
         //
         return this.loadResources(this.State.Routes.Meta);
     }
@@ -167,7 +167,7 @@ export class Trout {
         // console.log('Dependencies', dependencies);
         for (let resource of dependencies) {
             const loadedResource = await this.load(resource);
-            // console.log('loadResourcesSequentually', resource, loadedResource);
+            console.log('loadResourcesSequentually', resource, loadedResource);
         }
         return Promise.resolve(dependencies);
     }

@@ -143,23 +143,27 @@ export class TroutJS extends Trout {
             }
         }
     }
-    static launch = (app) => {
-        TroutJS.depencencies([
-            import('./router.js'),
-            import('./trout/services/root_services.js'),
-            import('./' + app.appName + '/services/subapp_services.js'),
-            import('./trout/events.js'),
-        ]).catch(reason => {
-            console.log(reason);
-        }).then((imports) => {
-            const write2die = new TroutJS(
-                imports, 
-                app
-            );
-            // see if pathname of url is a valid subapp
-            let _url = new URL(window.location.href);
-
-            write2die.State.Root.Services.Session.route({subAppName: _url.pathname});
+    static launch = (config_path) => {
+        fetch(config_path).then( response => { // Loading config.json file into config obj
+            response.json().then( config => {
+                TroutJS.depencencies([
+                    import('./router.js'),
+                    import('./trout/services/root_services.js'),
+                    import('./' + config.appName + '/services/subapp_services.js'),
+                    import('./trout/events.js'),
+                ]).catch(reason => {
+                    console.log(reason);
+                }).then((imports) => {
+                    const myapp = new TroutJS(
+                        imports, 
+                        config
+                    );
+                    // see if pathname of url is a valid subapp
+                    let _url = new URL(window.location.href);
+        
+                    myapp.State.Root.Services.Session.route({subAppName: _url.pathname});
+                });
+            });
         });
     }
 
@@ -172,4 +176,5 @@ export class TroutJS extends Trout {
             document.addEventListener("DOMContentLoaded", fn);
         }
     }
+
 }

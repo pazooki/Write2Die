@@ -1,0 +1,49 @@
+{
+    "appName": "write2die",
+    "server": "http://localhost",
+    "settings": {
+        "debug": true,
+        "cache": {
+            "enabled": false,
+            "localStorage": false,
+            "indexedDB": false
+        },
+        "localization": {
+            "enabled": false,
+            "default": "en",
+            "languages": {
+                "en": {
+                    "name": "English",
+                    "code": "en",
+                    "flag": "\ud83c\udde8\ud83c\udde6"
+                },
+                "zh": {
+                    "name": "Chinese",
+                    "code": "zh",
+                    "flag": "\ud83c\udde8\ud83c\uddf3"
+                }
+            }
+        },
+        "DefaultSubApp": "/home/home/"
+    },
+    "subapps": {
+        "/home/home/": "home",
+        "/home/access/": "access",
+        "/home/profile/": "profile",
+
+        "/contents/duels/get/": "duels.get",
+        "/contents/duels/post/": "duels.post",
+
+        "/contents/voices/get/": "voices.get",
+        "/contents/voices/post/": "voices.post",
+
+        "/contents/videos/get/": "videos.get",
+        "/contents/videos/post/": "videos.post",
+
+        "/contents/articles/post/": "articles.post",
+        "/contents/articles/get/": "articles.get",
+
+        "/invalid/invalid/": "invalid"
+        
+    }
+}

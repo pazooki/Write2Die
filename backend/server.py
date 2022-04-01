@@ -18,6 +18,7 @@ from handlers.services.messaging import Notification, Chat
 # from handlers.services.localization import Localization, LocalizationUpdate, CacheHandler
 from handlers.services.tracking import Tracking
 from handlers.services.logback import LogBack
+from handlers.services.articles import Articles
 from handlers.services.user import Auth, Signup, User, ProfileGovIDUploadFile, UserAddress, ContractAPI
 
 class Ping(BaseHandler):
@@ -73,9 +74,9 @@ routing = [
     (r"/auth/", Auth, {'db': db}),
     (r"/signup/", Signup, {'db': db}),
     (r"/user/", User, {'db': db}),
-    (r"/user/govid", ProfileGovIDUploadFile, {'db': db}),
-    (r"/user/address", UserAddress, {'db': db}),
-    (r"/user/contract", ContractAPI, {'db': db}),
+    (r"/content/articles/", Articles, {'db': db}),
+    
+    
     
     # My Portfolio
     (r"/user/order/", Order, {'db': db}),
