@@ -59,7 +59,7 @@ export class API extends Cache{
                 that.LocalStorage.removeFromCache(hashKey);
                 return postAjax(resource, data, { cacheStorage: that.LocalStorage });
             }
-            if (that.State.Settings.debug){
+            if (that.State.Config.settings.debug){
                 console.log(result);
             }
             return Promise.resolve(result);
@@ -78,7 +78,7 @@ export class API extends Cache{
                 that.LocalStorage.removeFromCache(hashKey);
                 return getAjax(resource, { urlParams: urlParams, type: type, cacheStorage: that.LocalStorage });
             }
-            if (that.State.Settings.debug){
+            if (that.State.Config.settings.debug){
                 console.log('Parsed Cache Result:', result);
             }
             console.log('Parsed Cache Result:', result);
@@ -113,7 +113,7 @@ export class API extends Cache{
                         resolve(responseData);
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
-                        if (that.State.Settings.debug) {
+                        if (that.State.Config.settings.debug) {
                             console.log(error.stack);
                             console.log(resource, XMLHttpRequest.responseText, textStatus, errorThrown);
                         }
@@ -130,7 +130,7 @@ export class API extends Cache{
         var urlTail = resource.route.split('.').pop();
         var routeUrlWithParams = resource.route;
         if (urlParams) {
-            routeUrlWithParams = that.State.Root.Services.Session.routeWithParams(resource, urlParams)
+            routeUrlWithParams = that.State.Root.Services.Session.getRouteWithParams(resource, urlParams)
         }
 
         console.log('DirectGet: ', routeUrlWithParams)
@@ -154,7 +154,7 @@ export class API extends Cache{
                         return resolve(responseData);
                     },
                     error: function (XMLHttpRequest, textStatus, errorThrown) {
-                        if (that.State.Settings.debug) {
+                        if (that.State.Config.settings.debug) {
                             console.log('DEBUG:      DirectGet Error: ', 
                             error, error.stack, 
                             XMLHttpRequest.debug, textStatus, errorThrown);
@@ -180,9 +180,9 @@ export class API extends Cache{
 
     Post = (resource, data, {cacheStorage=null}) => {
         let that = this;
-        if (this.State.Settings.cache.enabled && this.State.Settings.cache.localStorage){
+        if (this.State.Config.settings.cache.enabled && this.State.Config.settings.cache.localStorage){
             return that.localStorageTryCachedPost(resource, data, that.DirectPost)
-        } else if (this.State.Settings.cache.enabled && this.State.Settings.cache.indexedDB) {
+        } else if (this.State.Config.settings.cache.enabled && this.State.Config.settings.cache.indexedDB) {
             return this.indexedDBTryCachedPost(resource, { urlParams: urlParams, type: type }, that.DirectPost)
         } else {
             return this.DirectPost(resource, data, {cacheStorage: cacheStorage});
@@ -191,13 +191,13 @@ export class API extends Cache{
 
 
     Get = (resource, { urlParams = null, type = 'json' }) => { // TODO remove type, resource already have it.
-        if (this.State.Settings.debug){
+        if (this.State.Config.settings.debug){
             console.log('Get: ', resource);
         }
         let that = this;
-        if (this.State.Settings.cache.enabled && this.State.Settings.cache.localStorage){
+        if (this.State.Config.settings.cache.enabled && this.State.Config.settings.cache.localStorage){
             return this.localStorageTryCachedGet(resource, { urlParams: urlParams, type: type, cacheStorage: that.LocalStorage }, that.DirectGet)
-        } else if (this.State.Settings.cache.enabled && this.State.Settings.cache.indexedDB) {
+        } else if (this.State.Config.settings.cache.enabled && this.State.Config.settings.cache.indexedDB) {
             return this.indexedDBTryCachedGet(resource, { urlParams: urlParams, type: type, cacheStorage: that.indexedDB }, that.DirectGet)
         } else {
             return this.DirectGet(resource, { urlParams: urlParams, type: type, cacheStorage: null });

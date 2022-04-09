@@ -92,6 +92,11 @@ class BaseHandler(tornado.web.RequestHandler):
                         "code": status_code,
                         "message": self._reason,
                     })
+                
+    def write_json(self, payload_dict):
+        self.write(json.dumps(payload_dict, indent=4, sort_keys=True, default=str))
+        
+        
 def hash(key):
     h = pyhash.murmur3_32(1)
     return h(json.dumps(key).encode('ascii')[1:-1])

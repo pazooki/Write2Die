@@ -1,37 +1,524 @@
 {
-    "appName": "write2die",
-    "server": "http://localhost",
-    
-    "settings":{
+    "settings": {
         "debug": true,
         "cache": {
-            "enabled": false, 
-            "localStorage": false, 
+            "enabled": false,
+            "localStorage": false,
             "indexedDB": false
         },
         "localization": {
             "enabled": false,
             "default": "en",
             "languages": {
-                "en": { "name": "English", "code": "en", "flag": "🇨🇦" },
-                "zh": { "name": "Chinese", "code": "zh", "flag": "🇨🇳" }
+                "en": {
+                    "name": "English",
+                    "code": "en",
+                    "flag": "\ud83c\udde8\ud83c\udde6"
+                },
+                "zh": {
+                    "name": "Chinese",
+                    "code": "zh",
+                    "flag": "\ud83c\udde8\ud83c\uddf3"
+                }
             }
         },
-        "DefaultSubApp": "/home/home/"
+        "appName": "write2die",
+        "site": "http://localhost",
+        "server": "http://localhost",
+        "defaultSubApp": "/home/home/"
     },
-    "subapps":{
-        "/home/home/": "home",
-        "/home/access/": "access",
-        "/home/profile/": "profile",
-
-        "/contents/articles/post/": "articles",
-        "/contents/articles/": "articles",
-        "/contents/duels/": "duels",
-        "/contents/voices/": "voices",
-        "/contents/videos/": "videos",
-
-        "/write2die/test-page-1/": "test1",
-
-        "/invalid/invalid/": "invalid"
+    "subApps": {
+        "/home/home/": {
+            "filename": "home"
+        },
+        "/home/access/": {
+            "filename": "access"
+        },
+        "/home/profile/": {
+            "filename": "profile"
+        },
+        "/contents/articles/get/": {
+            "filename": "articles.get"
+        },
+        "/contents/articles/post/": {
+            "filename": "articles.post"
+        },
+        "/contents/videos/post/": {
+            "filename": "videos.post"
+        },
+        "/contents/videos/get/": {
+            "filename": "videos.get"
+        },
+        "/contents/duels/post/": {
+            "filename": "duels.post"
+        },
+        "/contents/duels/get/": {
+            "filename": "duels.get"
+        },
+        "/contents/voices/post/": {
+            "filename": "voices.post"
+        },
+        "/contents/voices/get/": {
+            "filename": "voices.get"
+        }
+    },
+    "routes": {
+        "Site": {
+            "route": "http://localhost",
+            "cache": {
+                "validityTime": 0
+            }
+        },
+        "Meta": [
+            {
+                "route": "/html/trout/index/index.desktop.html",
+                "device": "desktop",
+                "attributes": {
+                    "placementTag": "main"
+                },
+                "cache": {
+                    "validityTime": 0
+                }
+            },
+            {
+                "route": "/html/trout/index/menu.desktop.html",
+                "device": "desktop",
+                "attributes": {
+                    "placementTag": "menu-desktop"
+                },
+                "cache": {
+                    "validityTime": 0
+                }
+            },
+            {
+                "route": "/html/trout/index/footer.desktop.html",
+                "device": "desktop",
+                "attributes": {
+                    "placementTag": "footer-desktop"
+                },
+                "cache": {
+                    "validityTime": 0
+                }
+            },
+            {
+                "route": "/html/trout/index/index.mobile.html",
+                "device": "mobile",
+                "attributes": {
+                    "placementTag": "main"
+                },
+                "cache": {
+                    "validityTime": 0
+                }
+            },
+            {
+                "route": "/html/trout/index/menu.mobile.html",
+                "device": "mobile",
+                "attributes": {
+                    "placementTag": "menu-mobile"
+                },
+                "cache": {
+                    "validityTime": 0
+                }
+            },
+            {
+                "route": "/html/trout/index/footer.mobile.html",
+                "device": "mobile",
+                "attributes": {
+                    "placementTag": "footer-mobile"
+                },
+                "cache": {
+                    "validityTime": 0
+                }
+            },
+            {
+                "route": "/js/trout/thirdparty-libs/bootstrap.bundle.min.js",
+                "cache": {
+                    "validityTime": 0
+                }
+            },
+            {
+                "route": "/js/trout/thirdparty-libs/simplebar.js",
+                "cache": {
+                    "validityTime": 0
+                }
+            },
+            {
+                "route": "/js/trout/thirdparty-libs/flatpickr.js",
+                "cache": {
+                    "validityTime": 0
+                }
+            },
+            {
+                "route": "/js/trout/thirdparty-libs/theme.js",
+                "cache": {
+                    "validityTime": 0
+                }
+            },
+            {
+                "route": "/js/trout/thirdparty-libs/jquery-ui.min.js",
+                "cache": {
+                    "validityTime": 0
+                }
+            },
+            {
+                "route": "/js/trout/thirdparty-libs/jquery.timeago.js",
+                "cache": {
+                    "validityTime": 0
+                }
+            },
+            {
+                "route": "/js/trout/thirdparty-libs/jquery-editable-select.min.js",
+                "cache": {
+                    "validityTime": 0
+                }
+            },
+            {
+                "route": "/css/trout/thirdparty-libs/simplebar.css",
+                "attributes": {},
+                "cache": {
+                    "validityTime": 0
+                }
+            },
+            {
+                "route": "/css/trout/thirdparty-libs/flatpickr.min.css",
+                "attributes": {},
+                "cache": {
+                    "validityTime": 0
+                }
+            },
+            {
+                "route": "/css/trout/thirdparty-libs/bootstrap.min.css",
+                "cache": {
+                    "validityTime": 0
+                }
+            },
+            {
+                "route": "/css/trout/thirdparty-libs/jquery-ui.min.css",
+                "attributes": {},
+                "cache": {
+                    "validityTime": 0
+                }
+            },
+            {
+                "route": "/css/trout/thirdparty-libs/jquery-ui.theme.min.css",
+                "attributes": {},
+                "cache": {
+                    "validityTime": 0
+                }
+            },
+            {
+                "route": "/css/trout/thirdparty-libs/jquery-ui.structure.min.css",
+                "attributes": {},
+                "cache": {
+                    "validityTime": 0
+                }
+            },
+            {
+                "route": "/css/trout/thirdparty-libs/jquery-editable-select.min.css",
+                "attributes": {},
+                "cache": {
+                    "validityTime": 0
+                }
+            },
+            {
+                "route": "/css/trout/thirdparty-libs/bootstrap-icons/bootstrap-icons.css",
+                "attributes": {},
+                "cache": {
+                    "validityTime": 0
+                }
+            }
+        ],
+        "API": {
+            "signup": {
+                "route": "http://localhost/api/signup/",
+                "auth": false,
+                "cache": {
+                    "validityTime": 0
+                }
+            },
+            "auth": {
+                "route": "http://localhost/api/auth/",
+                "auth": false,
+                "cache": {
+                    "validityTime": 0
+                }
+            },
+            "user": {
+                "route": "http://localhost/api/user/",
+                "auth": true,
+                "cache": {
+                    "validityTime": 0
+                }
+            },
+            "articles_action": {
+                "route": "http://localhost/api/content/articles/",
+                "auth": false,
+                "cache": {
+                    "validityTime": 0
+                }
+            },
+            "service_cache": {
+                "route": "http://localhost/api/services/cache",
+                "auth": false,
+                "cache": {
+                    "validityTime": 0
+                }
+            },
+            "service_localization_update": {
+                "route": "http://localhost/api/services/localization/update",
+                "auth": false,
+                "cache": {
+                    "validityTime": 0
+                }
+            },
+            "service_localization": {
+                "route": "http://localhost/api/services/localization",
+                "auth": false,
+                "cache": {
+                    "validityTime": 0
+                }
+            },
+            "service_subscription": {
+                "route": "http://localhost/api/services/subscription/",
+                "auth": true,
+                "cache": {
+                    "validityTime": 0
+                }
+            },
+            "service_messaging_notification": {
+                "route": "http://localhost/api/services/messaging/notification",
+                "auth": true,
+                "cache": {
+                    "validityTime": 0
+                }
+            },
+            "service_messaging_chat": {
+                "route": "http://localhost/api/services/messaging/chat",
+                "auth": true,
+                "cache": {
+                    "validityTime": 0
+                }
+            },
+            "service_tracking": {
+                "route": "http://localhost/api/services/tracking",
+                "auth": false,
+                "cache": {
+                    "validityTime": 0
+                }
+            },
+            "service_logback": {
+                "route": "http://localhost/api/services/logback",
+                "auth": false,
+                "cache": {
+                    "validityTime": 0
+                }
+            },
+            "service_ping": {
+                "route": "http://localhost/api/services/ping",
+                "auth": false,
+                "cache": {
+                    "validityTime": 0
+                }
+            },
+            "es__search_records": {
+                "route": "http://localhost/es/profile_index/_search?pretty=true",
+                "auth": false,
+                "cache": {
+                    "validityTime": 0
+                }
+            },
+            "es__local__search_records": {
+                "route": "http://localhost:9200/profile_index/_search?pretty=true",
+                "auth": false,
+                "cache": {
+                    "validityTime": 0
+                }
+            }
+        },
+        "Data": {
+            "translations": {
+                "route": "/static/data/translations.json",
+                "auth": false,
+                "cache": {
+                    "validityTime": 0
+                }
+            },
+            "countries": {
+                "route": "/static/data/countries.json",
+                "auth": false,
+                "cache": {
+                    "validityTime": 0
+                }
+            },
+            "countries_flag": {
+                "route": "/static/data/countries-flag.json",
+                "auth": false,
+                "cache": {
+                    "validityTime": 0
+                }
+            },
+            "timezones": {
+                "route": "/static/data/timezones.json",
+                "auth": false,
+                "cache": {
+                    "validityTime": 0
+                }
+            }
+        },
+        "Components": {
+            "modal": {
+                "route": "/html/trout/index/components/modal.html",
+                "auth": false,
+                "cache": {
+                    "validityTime": 2592000000
+                }
+            }
+        },
+        "ThirdPartyModuleResources": {
+            "ApexCharts": [
+                {
+                    "route": "/js/trout/thirdparty-libs/apexcharts.js",
+                    "cache": {
+                        "validityTime": 0
+                    }
+                }
+            ],
+            "PrettyPrintJson": [
+                {
+                    "route": "/js/trout/thirdparty-libs/pretty-print-json.min.js",
+                    "cache": {
+                        "validityTime": 86400000
+                    }
+                },
+                {
+                    "route": "/css/trout/thirdparty-libs/pretty-print-json.css",
+                    "cache": {
+                        "validityTime": 86400000
+                    }
+                }
+            ],
+            "DataTables": [
+                {
+                    "route": "/js/trout/thirdparty-libs/jquery.dataTables.min.js",
+                    "cache": {
+                        "validityTime": 0
+                    }
+                },
+                {
+                    "route": "/js/trout/thirdparty-libs/datatables.min.js",
+                    "cache": {
+                        "validityTime": 0
+                    }
+                },
+                {
+                    "route": "/js/trout/thirdparty-libs/dataTables.bootstrap5.min.js",
+                    "cache": {
+                        "validityTime": 0
+                    }
+                },
+                {
+                    "route": "/js/trout/thirdparty-libs/searchBuilder.bootstrap5.min.js",
+                    "cache": {
+                        "validityTime": 0
+                    }
+                },
+                {
+                    "route": "/js/trout/thirdparty-libs/dataTables.responsive.min.js",
+                    "cache": {
+                        "validityTime": 0
+                    }
+                },
+                {
+                    "route": "/js/trout/thirdparty-libs/dataTables.rowReorder.min.js",
+                    "cache": {
+                        "validityTime": 0
+                    }
+                },
+                {
+                    "route": "/js/trout/thirdparty-libs/dataTables.rowGroup.min.js",
+                    "cache": {
+                        "validityTime": 0
+                    }
+                },
+                {
+                    "route": "/js/trout/thirdparty-libs/dataTables.dateTime.min.js",
+                    "cache": {
+                        "validityTime": 0
+                    }
+                },
+                {
+                    "route": "/js/trout/thirdparty-libs/dataTables.searchBuilder.min.js",
+                    "cache": {
+                        "validityTime": 0
+                    }
+                },
+                {
+                    "route": "/js/trout/thirdparty-libs/pdfmake.min.js",
+                    "cache": {
+                        "validityTime": 0
+                    }
+                },
+                {
+                    "route": "/js/trout/thirdparty-libs/vfs_fonts.js",
+                    "cache": {
+                        "validityTime": 0
+                    }
+                },
+                {
+                    "route": "/css/trout/thirdparty-libs/responsive.bootstrap5.min.css",
+                    "cache": {
+                        "validityTime": 0
+                    }
+                },
+                {
+                    "route": "/css/trout/thirdparty-libs/responsive.dataTables.min.css",
+                    "cache": {
+                        "validityTime": 0
+                    }
+                },
+                {
+                    "route": "/css/trout/thirdparty-libs/jquery.dataTables.min.css",
+                    "cache": {
+                        "validityTime": 0
+                    }
+                },
+                {
+                    "route": "/css/trout/thirdparty-libs/datatables.min.css",
+                    "cache": {
+                        "validityTime": 0
+                    }
+                },
+                {
+                    "route": "/css/trout/thirdparty-libs/dataTables.bootstrap5.min.css",
+                    "cache": {
+                        "validityTime": 0
+                    }
+                },
+                {
+                    "route": "/css/trout/thirdparty-libs/dataTables.dateTime.min.css",
+                    "cache": {
+                        "validityTime": 0
+                    }
+                },
+                {
+                    "route": "/css/trout/thirdparty-libs/rowReorder.dataTables.min.css",
+                    "cache": {
+                        "validityTime": 0
+                    }
+                },
+                {
+                    "route": "/css/trout/thirdparty-libs/rowGroup.dataTables.min.css",
+                    "cache": {
+                        "validityTime": 0
+                    }
+                },
+                {
+                    "route": "/css/trout/thirdparty-libs/searchBuilder.dataTables.min.css",
+                    "cache": {
+                        "validityTime": 0
+                    }
+                }
+            ]
+        }
     }
 }

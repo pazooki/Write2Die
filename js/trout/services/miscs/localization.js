@@ -142,15 +142,15 @@ export class Localization extends Datetime {
         this.State = State;
 
         // this.LANGUAGE_CODES = ['en', 'tr', 'zh', 'es', 'pt', 'hi', 'bn', 'ru', 'ja', 'fa', 'ar']
-        this.supportedLanguages = this.State.Settings.localization.languages; // to be set in app.settings
-        this.currentLanguage = this.State.Settings.localization.default; // to be set in app.settings
+        this.supportedLanguages = this.State.Config.settings.localization.languages; // to be set in app.settings
+        this.currentLanguage = this.State.Config.settings.localization.default; // to be set in app.settings
         this.Backend_NewTranslationPromises = [];
         this.waitForBackendToTranslationToFinish = false;
     }
 
     updateCurrentLanguage = (lang = null) => {
         this.currentLanguage = lang || this.State.Root.Services.Session.currentSessionSearchParams.get('language') ||
-        this.State.Settings.localization.default ||
+        this.State.Config.settings.localization.default ||
         //   this.getDefaultLanguageOfBrowser() || 
         window.localStorage.getItem('language');
 
@@ -233,7 +233,7 @@ export class Localization extends Datetime {
         if (default_lan !== '' && default_lan) {
             return default_lan.split('-')[0];
         } else {
-            return this.State.Settings.localization.default;
+            return this.State.Config.settings.localization.default;
         }
     }
 
@@ -342,7 +342,7 @@ export class Localization extends Datetime {
     //         language == null ||
     //         this.LANGUAGE_CODES.indexOf(language) === -1
     //     ) {
-    //         if (this.State.Settings.debug) {
+    //         if (this.State.Config.settings.debug) {
     //             console.log('Invalid For Translation', el, language, el.innerText);
     //         }
     //         return true;

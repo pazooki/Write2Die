@@ -2,12 +2,9 @@ import { Trout } from './trout/trout.js';
 
 
 export class TroutJS extends Trout {
-    constructor(imports, {appName=null, server=null, settings=null, subapps=null}) {
-        super(imports)
-        this.appName = appName
-        this.server = server
-        this.State.Settings = settings
-        this.subapps = subapps
+    constructor(imports, config) {
+        super(imports, config)
+        this.config = config;
 
         this.setupRouter();
         this.setupRootState();
@@ -17,8 +14,8 @@ export class TroutJS extends Trout {
     }
 
     setupRouter = () => {
-        this.State.Root.Router = new this.State.Root.Modules.Router(this.server, this.appName);
-        this.State.Routes = this.State.Root.Router.Routes;
+        this.State.Root.Router = new this.State.Root.Modules.RootServices.Router(this.config);
+        this.State.Routes = this.config.routes;
     }
 
     setupRootState = () => {
@@ -44,8 +41,9 @@ export class TroutJS extends Trout {
 
     setupSubAppState = () => {
         // this.State.SubApp.Services = new this.State.Root.Modules.SubAppServices;
-        this.State.SubApp.Services.Chat = new this.State.Root.Modules.SubAppServices.Chat();
-        this.State.SubApp.Services.Notification = new this.State.Root.Modules.SubAppServices.Notification();
+        this.State.SubApp.Services.Editor = new this.State.Root.Modules.SubAppServices.Editor(this.State);
+        this.State.SubApp.Services.Chat = new this.State.Root.Modules.SubAppServices.Chat(this.State);
+        this.State.SubApp.Services.Notification = new this.State.Root.Modules.SubAppServices.Notification(this.State);
 
         this.State.SubApp.Services.Articles = new this.State.Root.Modules.SubAppServices.Articles(this.State);
     }
@@ -64,7 +62,7 @@ export class TroutJS extends Trout {
         this.State.Root.SessionHistory.RegisteredSubAppEvents = {};
         if (!this.State.debug){
             this.State.Root.Services.Events.setup();
-            if (this.State.Settings.localization.enabled) {
+            if (this.State.Config.settings.localization.enabled) {
                 this.State.Root.Services.Localization.setup();
             } else {
                 this.State.Root.Services.Localization.disable();
@@ -146,10 +144,11 @@ export class TroutJS extends Trout {
     static launch = (config_path) => {
         fetch(config_path).then( response => { // Loading config.json file into config obj
             response.json().then( config => {
+                console.log(config);
                 TroutJS.depencencies([
-                    import('./router.js'),
+                    // import('./trout/services/miscs/router.js'),
                     import('./trout/services/root_services.js'),
-                    import('./' + config.appName + '/services/subapp_services.js'),
+                    import('./' + config.settings.appName + '/services/subapp_services.js'),
                     import('./trout/events.js'),
                 ]).catch(reason => {
                     console.log(reason);
@@ -161,7 +160,7 @@ export class TroutJS extends Trout {
                     // see if pathname of url is a valid subapp
                     let _url = new URL(window.location.href);
         
-                    myapp.State.Root.Services.Session.route({subAppName: _url.pathname});
+                    myapp.State.Root.Services.Session.route({subAppPath: _url.pathname});
                 });
             });
         });

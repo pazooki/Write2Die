@@ -69,9 +69,9 @@ export class Events {
     }
 
     beforeLeavingPage(tracker){
-        window.onbeforeunload = function(){
-            this.State.Root.Services.API.beacon(this.State.Root.Router.service_tracking, tracker.results);
-        }
+        // window.onbeforeunload = function(){
+        //     this.State.Root.Services.API.beacon(this.State.Root.Router.service_tracking, tracker.results);
+        // }
     }
 
     setupSearch(){

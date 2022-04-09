@@ -8,8 +8,10 @@ import { Network } from './miscs/network.js';
 import { Auth } from './miscs/auth.js';
 import { Session } from './miscs/session.js';
 import { Localization } from './miscs/localization.js';
+import { Router } from './miscs/router.js';
 
 let RootServices = {
+    Router: Router,
     Data: Data,
     Auth: Auth,
     Network: Network,

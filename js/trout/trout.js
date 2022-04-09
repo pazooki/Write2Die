@@ -1,11 +1,12 @@
 export class Trout {
-    constructor(imports) {
+    constructor(imports, config) {
         this.performance = {
             start: Date.now(),
             end: 0,
             loadedAfter: 0,
         }
         this.State = { 
+            Config: config,
             Root: {
                 AppName: 'Trout',
                 TroutModulesLoaded: false,
@@ -16,6 +17,7 @@ export class Trout {
                         URL: null,
                         SubApp: '/home/home/',
                         TS: 0,
+                        SubApp_FileName: 'home'
                     },
                     RegisteredAppEvents: {},
                     RegisteredSubAppEvents: {},
@@ -29,6 +31,7 @@ export class Trout {
             SubApp: {
                 module: null,
                 Services: {}, // override in Tajiran App: Instantiate Class Tree (Manual Dependecy Passing)
+                thirdpartyLibs: [],
             }
         }
     }
@@ -44,7 +47,7 @@ export class Trout {
 
         console.log('Loading Resources Sub App:', this.State.Root.SessionHistory.CurrentSession.SubApp);
         this.loadResources(this.State.Root.Router.SubAppResources(
-            this.State.Root.SessionHistory.CurrentSession.SubApp, this.State.Root.SessionHistory.Device
+            this.State.Root.SessionHistory.CurrentSession.SubApp, this.State.Root.SessionHistory.CurrentSession.SubApp_FileName, this.State.Root.SessionHistory.Device
         )).then(
             results => {
                 console.log('Result of LoadApp:', results);
@@ -54,14 +57,18 @@ export class Trout {
                 // export default SubApp
                 // new SubApp(this.State) # Root Level Manager Passed Down To SubApp
                 //
-                if (this.State.Settings.debug){
+                if (this.State.Config.settings.debug){
                     console.log(this.State.Root.SessionHistory.CurrentSession.SubApp, this.State.Root.SessionHistory.Device);
                     console.log(this.State.Root.Router.SubAppModule(
-                        this.State.Root.SessionHistory.CurrentSession.SubApp, this.State.Root.SessionHistory.Device
+                        this.State.Root.SessionHistory.CurrentSession.SubApp, 
+                        this.State.Root.SessionHistory.CurrentSession.SubApp_FileName, 
+                        this.State.Root.SessionHistory.Device
                     ).route);
                 }
                 import(this.State.Root.Router.SubAppModule(
-                    this.State.Root.SessionHistory.CurrentSession.SubApp, this.State.Root.SessionHistory.Device
+                    this.State.Root.SessionHistory.CurrentSession.SubApp, 
+                    this.State.Root.SessionHistory.CurrentSession.SubApp_FileName, 
+                    this.State.Root.SessionHistory.Device
                 ).route).then(subAppModule => {
                     this.State.SubApp.module = new subAppModule.default(this.State);
 
@@ -73,7 +80,7 @@ export class Trout {
                     //
                     this.loadResources(this.State.SubApp.module.resources.map(name => {
 
-                        if (this.State.Settings.debug){
+                        if (this.State.Config.settings.debug){
                             console.log('Loading SubApp Resource', name)
                         }
                         return this.State.Routes.ThirdPartyModuleResources[name];
@@ -86,36 +93,39 @@ export class Trout {
                             //
 
 
-                            if (this.State.Settings.debug){
+                            if (this.State.Config.settings.debug){
                                 console.log('SubApp ThirdParty Modules Loaded(Non-JS): ', results);
                             }
                             let subappJSResources = this.State.SubApp.module.resources.map(name => {
-
-
-                                if (this.State.Settings.debug){
+                                if (this.State.Config.settings.debug){
                                     console.log('Loading SubApp Resource', name)
                                 }
                                 let resource = this.State.Routes.ThirdPartyModuleResources[name];
 
-                                if (this.State.Settings.debug){
-                                    console.log(resource);
+                                if (this.State.Config.settings.debug){
+                                    console.log(name, resource);
                                 }
                                 return resource;
                             }).flat().filter(resource => resource.route.endsWith('.js')).map(resource => {
-                                return import(resource.route);
+                                console.log("resource.route: ", resource.route);
+                                return import(resource.route).then((module) => {
+                                    console.log('SubApp ThirdParty Lib Imported: ', module)
+                                    this.State.SubApp.thirdpartyLibs.push([resource, module]);
+                                });
                             });
+                            console.log("subappJSResources: ", subappJSResources);
                             Promise.allSettled(subappJSResources).then((results) => {
 
-                                if (this.State.Settings.debug){
-                                    console.log(results);
+                                if (this.State.Config.settings.debug){
+                                    console.log('subappJSResources: ', results);
                                 }
                                 this.State.SubApp.module.run().then(
                                     result => {
 
-                                        if (this.State.Settings.debug){
-                                            console.log(result);
+                                        if (this.State.Config.settings.debug){
+                                            console.log('SubApp Module', result);
                                         }
-                                        this.State.Root.Canada001ModulesLoaded = true;
+                                        this.State.Root.TroutModulesLoaded = true;
                                         this.afterLoadingSubApp();
                                     },
                                     reject => {

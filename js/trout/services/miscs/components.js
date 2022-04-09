@@ -84,7 +84,7 @@ export class Component{
 
     btn_signIn = () => { // TODO: use Session.route()
         // return btn(
-        //     this.State.Root.Data.API.routeWithParams(this.State.Root.Data.API.Router.site__index.url, {
+        //     this.State.Root.Data.API.getRouteWithParams(this.State.Root.Data.API.Router.site__index.url, {
         //         'page': 'sign-in', 
         //         'next': this.State.Root.Data.API.currentRouteForNextParam()
         //     }), 
@@ -98,7 +98,7 @@ export class Component{
 
     btn_signUp = () => { // TODO: use Session.route()
         // return btn(
-        //     this.State.Root.Data.API.routeWithParams(this.State.Root.Data.API.Router.site__index.url, {
+        //     this.State.Root.Data.API.getRouteWithParams(this.State.Root.Data.API.Router.site__index.url, {
         //         'page': 'sign-up', 
         //         'next': this.State.Root.Data.API.currentRouteForNextParam()
         //     }), 

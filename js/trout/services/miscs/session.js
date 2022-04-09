@@ -1,18 +1,18 @@
 export class Session {
     constructor(App) {
         this.App = App;
-        this.subApp = this.getCurrentSubAppName();
+        this.subApp = this.getCurrentSubAppPath();
         // console.log('Initializing Session.');
     }
 
-    route = ({subAppName = null, session_id = null}) => {
+    route = ({subAppPath = null, session_id = null}) => {
         // Load App
         // Load Sub App
-        this.forwardRoute({subAppName: subAppName , session_id: session_id});
+        this.forwardRoute({subAppPath: subAppPath , session_id: session_id});
         if (!this.App.State.Root.TroutModulesLoaded) {
             this.App.loadAppModules().then(
                 results => {
-                    if (this.App.State.Settings.debug){
+                    if (this.App.State.Config.settings.debug){
                         console.log('loadAppModules:', results);
                         console.log('route.LoadAppModules Completed', results);
                     }
@@ -24,6 +24,7 @@ export class Session {
                     console.log('Going to Run: loadSubAppModules')
                     this.App.loadSubAppModules();
                     console.log('loadSubAppModules is done.')
+                    this.App.afterLoadingSubApp();
                 },
                 rejects => {
                     console.log(rejects);
@@ -33,22 +34,23 @@ export class Session {
             this.App.removeSubAppResources(); // Clean up resources from previous route, Root level resources this.App remains
             this.App.afterLoadingApp();
             this.App.loadSubAppModules();
+            this.App.afterLoadingSubApp();
         }
     }
 
-    forwardRoute = ({subAppName = null, session_id = null}) => {
-        // Assumption: if subAppName is given then treat it as _url, build a URL
+    forwardRoute = ({subAppPath = null, session_id = null}) => {
+        // Assumption: if subAppPath is given then treat it as _url, build a URL
 
-        // [1-] process pathname with params # format dir/subappname?param1=x&paramN=N || dir/subappname/?param1=x&paramN=N
-        // [2-] proccess subAppName with params
-        // [3-] separate subappname from params
+        // [1-] process pathname with params # format dir/subAppPath?param1=x&paramN=N || dir/subAppPath/?param1=x&paramN=N
+        // [2-] proccess subAppPath with params
+        // [3-] separate subAppPath from params
         // update sessionhistory
         // [4-] validate route to content exists
         // [5-] route to subapp
         // [6-] pass params to subapp using session history
-        // [7-] update _url with subappname & params
+        // [7-] update _url with subAppPath & params
 
-        console.log('Forward Route: ', subAppName);
+        console.log('Forward Route: ', subAppPath);
 
         if (session_id !== null) {
             this.App.State.Root.SessionHistory.CurrentSession = this.App.State.Root.SessionHistory.Sessions.find(
@@ -65,35 +67,37 @@ export class Session {
 
         let _url;
         try {
-            if (subAppName !== null){
-                console.log('URL has a route', subAppName);
+            if (subAppPath !== null){
+                console.log('URL has a route', subAppPath);
                 _url = new URL(window.location.origin);
-                _url.pathname = subAppName.split('?')[0];
-                if(subAppName.indexOf('?') >= 0){
-                    _url.search = subAppName.split('?')[1];
-                }
+                _url.pathname = subAppPath.split('?')[0];
+                _url.search = window.location.search;
                 if (!_url.pathname.endsWith('/')){
                     _url.pathname += '/';
                 }
             } else {
-                console.log('Redirecting to Default Route - Invalid SubApp Name', subAppName);
-                subAppName = this.App.State.Settings.DefaultSubApp;
+                console.log('Redirecting to Default Route - Invalid SubApp Name', subAppPath);
+                subAppPath = this.App.config.settings.defaultSubApp;
             }
         } catch (error) {
             _url = new URL(window.location);
         }
 
         if (_url.pathname === '/'){
-            _url.pathname = this.App.State.Settings.DefaultSubApp;
+            _url.pathname = this.App.config.settings.defaultSubApp;
         }
-        
+
         console.log('Finalized Route: ', _url.pathname);
         this.App.State.Root.SessionHistory.CurrentSession.SubApp = _url.pathname;
+        
+        console.log(_url.pathname);
+        console.log(this.App.State.Config.subApps[_url.pathname].filename);
+
+        this.App.State.Root.SessionHistory.CurrentSession.SubApp_FileName = this.App.State.Config.subApps[_url.pathname].filename;
         this.App.State.Root.SessionHistory.CurrentSession.TS = Date.now();
         this.App.State.Root.SessionHistory.CurrentSession.URL = _url;
 
-
-        if (this.App.State.Settings.debug){
+        if (this.App.State.Config.settings.debug){
             console.log(this.App.State.Root.SessionHistory.CurrentSession);
         }
         
@@ -116,13 +120,14 @@ export class Session {
 
     validateRoute = () => {
         console.log('validateRoute: ', this.App.State.Root.SessionHistory.CurrentSession.SubApp);
-        if(!Object.keys(this.App.subapps).includes(this.App.State.Root.SessionHistory.CurrentSession.SubApp)){
+        if(!Object.keys(this.App.State.Config.subApps).includes(this.App.State.Root.SessionHistory.CurrentSession.SubApp)){
             alert('Invalid Route: ' + this.App.State.Root.SessionHistory.CurrentSession.SubApp);
-            // this.forwardRoute({subAppName: this.App.State.Root.SessionHistory.DefaultSubApp});
+            // this.forwardRoute({subAppPath: this.App.State.Root.SessionHistory.defaultSubApp});
         } else {
             return true;
         }
     }
+
 
     navigate = () => {
         let currentSession = this.App.State.Root.SessionHistory.CurrentSession;
@@ -171,7 +176,7 @@ export class Session {
         let that = this;
         let subappRefs = document.getElementById('subapp').querySelectorAll('[subapp]');
 
-        if (this.App.State.Settings.debug){
+        if (this.App.config.settings.debug){
             console.log(subappRefs);
         }
         let uniqueIdx = 0;
@@ -185,11 +190,11 @@ export class Session {
                 };
                 subappRef.addEventListener('click', function (event) {
 
-                    if (that.App.State.Settings.debug){
+                    if (that.App.config.settings.debug){
                         console.log('Route To', subappRef.getAttribute('subapp'));
                     }
                     console.log('SubApp Click Listener: ', subappRef.getAttribute('subapp'))
-                    that.route({subAppName: subappRef.getAttribute('subapp')});
+                    that.route({subAppPath: subappRef.getAttribute('subapp')});
                 }, false);
             }
         }
@@ -208,10 +213,10 @@ export class Session {
                     'event': 'routingFromContentListener'
                 };
                 subappRef.addEventListener('click', function (event) {
-                    if (that.App.State.Settings.debug){
+                    if (that.App.config.settings.debug){
                         console.log('Route To', subappRef.getAttribute('subapp'));
                     }
-                    that.route({subAppName: subappRef.getAttribute('subapp')});
+                    that.route({subAppPath: subappRef.getAttribute('subapp')});
                 }, false);
             }
         }
@@ -224,8 +229,8 @@ export class Session {
         keywords.setAttribute("keywords", keywords.attributes.getNamedItem('content').nodeValue + keywords_values);
     }
 
-    setParams = (keyValues, reload = false) => {
-        var _url = new URL(this.Router.site__index._url);
+    setParams = (url, keyValues, reload = false) => {
+        var _url = new URL(url);
         for (let [key, value] of Object.entries(keyValues)) {
             key = encodeURIComponent(key);
             value = encodeURIComponent(value);
@@ -238,7 +243,7 @@ export class Session {
         }
     }
 
-    getCurrentSubAppName = () => {
+    getCurrentSubAppPath = () => {
         return this.App.State.Root.SessionHistory.CurrentSession.SubApp;
     }
 
@@ -287,13 +292,23 @@ export class Session {
         }
     }
 
-    routeWithParams = (resource, params) => {
+    getRouteWithParams = (resource, params) => {
         let route_with_params = new URL(resource.route);
         for (let [key, value] of Object.entries(params)) {
             route_with_params.searchParams.delete(key);
             route_with_params.searchParams.set(key, value);
         }
         return route_with_params.href;
+    }
+
+    goTo = (route, params) => {
+        let route_with_params = new URL(route);
+        for (let [key, value] of Object.entries(params)) {
+            route_with_params.searchParams.delete(key);
+            route_with_params.searchParams.set(key, value);
+        }
+        window.location.href = route_with_params.href;
+        // window.location.reload();
     }
 
     // getUrlParamsAsADict = () => {
@@ -304,8 +319,8 @@ export class Session {
     //     return decodeURI((new URL(window.location.href)).pathname + (new URL(window.location.href)).search);
     // }
 
-    // getParam = (key) => {
-    //     var _url = new URL(window.location.href);
-    //     return _url.searchParams.get(key);
-    // }
+    getParam = (key) => {
+        var _url = new URL(window.location.href);
+        return _url.searchParams.get(key);
+    }
 }
