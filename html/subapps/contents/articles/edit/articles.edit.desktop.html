@@ -3,8 +3,7 @@
         <div class="col-md-12">
             <div class="row">
                 <div class="col-md-6">
-                    <input type="text" class="input" id="article_title" style="width:100%"
-                    placeholder="Title ...">
+                    <input type="text" class="input" id="article_title" style="width:100%" placeholder="Title ...">
                 </div>
                 <div class="col-md-1">
                     <div class="form-check form-switch">
@@ -25,7 +24,14 @@
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    <textarea id="editor">Here you can write and publish your articles.</textarea>
+                    <input type="text" class="input" id="description" style="width:100%" placeholder="Description ...">
+                    <form method="post">
+                        <textarea id="editor" name="editordata"></textarea>
+                    </form>
+
+
+                    <!-- <div id="summernote"></div> -->
+                    <!-- <textarea id="editor">Here you can write and publish your articles.</textarea> -->
                 </div>
             </div>
         </div>

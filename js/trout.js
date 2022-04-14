@@ -33,6 +33,7 @@ export class TroutJS extends Trout {
         this.State.Root.Services.Tracker = new this.State.Root.Modules.RootServices.Tracker(this.State);
         this.State.Root.Services.Subscription = new this.State.Root.Modules.RootServices.Subscription(this.State);
         this.State.Root.Services.Search = new this.State.Root.Modules.RootServices.Search(this.State);
+        this.State.Root.Services.Utils = new this.State.Root.Modules.RootServices.Utils(this.State);
 
         this.State.Root.Services.Events = new this.State.Root.Modules.Events(this.State);
         

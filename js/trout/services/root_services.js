@@ -9,6 +9,7 @@ import { Auth } from './miscs/auth.js';
 import { Session } from './miscs/session.js';
 import { Localization } from './miscs/localization.js';
 import { Router } from './miscs/router.js';
+import { Utils } from './miscs/utils.js';
 
 let RootServices = {
     Router: Router,
@@ -24,6 +25,7 @@ let RootServices = {
     Tracker: Tracker,
     Subscription: Subscription, 
     Search: Search,
+    Utils: Utils
 }
 
 export {

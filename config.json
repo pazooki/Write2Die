@@ -191,6 +191,12 @@
                 }
             },
             {
+                "route": "/js/trout/thirdparty-libs/fontawesome/all.js",
+                "cache": {
+                    "validityTime": 0
+                }
+            },
+            {
                 "route": "/css/trout/thirdparty-libs/flatpickr.min.css",
                 "attributes": {},
                 "cache": {
@@ -391,31 +397,13 @@
             ],
             "Editor": [
                 {
-                    "route": "/css/trout/thirdparty-libs/quill.core.css",
+                    "route": "/js/trout/thirdparty-libs/summernote-lite.min.js",
                     "cache": {
                         "validityTime": 0
                     }
                 },
                 {
-                    "route": "/css/trout/thirdparty-libs/quill.snow.css",
-                    "cache": {
-                        "validityTime": 0
-                    }
-                },
-                {
-                    "route": "/css/trout/thirdparty-libs/quill.bubble.css",
-                    "cache": {
-                        "validityTime": 0
-                    }
-                },
-                {
-                    "route": "/js/trout/thirdparty-libs/quill.min.js",
-                    "cache": {
-                        "validityTime": 0
-                    }
-                },
-                {
-                    "route": "/js/trout/thirdparty-libs/quill.core.js",
+                    "route": "/css/trout/thirdparty-libs/summernote-lite.min.css",
                     "cache": {
                         "validityTime": 0
                     }
