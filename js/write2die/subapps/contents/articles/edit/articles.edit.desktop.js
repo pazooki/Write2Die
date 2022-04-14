@@ -47,12 +47,14 @@ export default class ArticleEdit {
 
                         if (that.currentArticleObj.meta.auto_save) {
                             that.editor.on('summernote.change', function (we, contents, $editable) {
-                                debounce(that.saveArticle, 300);
+                                let call = debounce(that.saveArticle, 300);
+                                call();
                             });
                         }
                     });
                     document.getElementById('article_save_btn').addEventListener('click', function () {
-                        debounce(that.saveArticle, 300);
+                        let call = debounce(that.saveArticle, 300);
+                        call()
                     });
 
                 } else {
