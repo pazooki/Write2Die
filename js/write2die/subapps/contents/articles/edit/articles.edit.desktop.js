@@ -35,6 +35,8 @@ export default class ArticleEdit {
             resolve => {
                 let that = this;
 
+                let debouncedSaveArticle = debounce(that.saveArticle, 300);
+
                 that.editor = this.State.SubApp.Services.Editor.create('#editor');
 
                 if (window.location.search != null) {
@@ -47,14 +49,12 @@ export default class ArticleEdit {
 
                         if (that.currentArticleObj.meta.auto_save) {
                             that.editor.on('summernote.change', function (we, contents, $editable) {
-                                let call = debounce(that.saveArticle, 300);
-                                call();
+                                debouncedSaveArticle()
                             });
                         }
                     });
                     document.getElementById('article_save_btn').addEventListener('click', function () {
-                        let call = debounce(that.saveArticle, 300);
-                        call()
+                        debouncedSaveArticle()
                     });
 
                 } else {
