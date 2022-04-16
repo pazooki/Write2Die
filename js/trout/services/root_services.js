@@ -10,6 +10,7 @@ import { Session } from './miscs/session.js';
 import { Localization } from './miscs/localization.js';
 import { Router } from './miscs/router.js';
 import { Utils } from './miscs/utils.js';
+import { Fonts } from './miscs/fonts.js';
 
 let RootServices = {
     Router: Router,
@@ -25,7 +26,8 @@ let RootServices = {
     Tracker: Tracker,
     Subscription: Subscription, 
     Search: Search,
-    Utils: Utils
+    Utils: Utils,
+    Fonts: Fonts
 }
 
 export {

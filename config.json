@@ -63,6 +63,9 @@
         },
         "/contents/articles/edit/": {
             "filename": "articles.edit"
+        },
+        "/contents/articles/view/": {
+            "filename": "articles.view"
         }
     },
     "routes": {
@@ -73,12 +76,12 @@
             }
         },
         "SubApps": {
-           "articles.edit":  {
-               "route": "/contents/articles/edit/",
-               "cache": {
-                   "validityTime": 0
-               }
-           }
+            "articles.edit": {
+                "route": "/contents/articles/edit/",
+                "cache": {
+                    "validityTime": 0
+                }
+            }
         },
         "Meta": [
             {
@@ -392,9 +395,7 @@
             }
         },
         "ThirdPartyModuleResources": {
-            "Math": [
-                
-            ],
+            "Math": [],
             "Editor": [
                 {
                     "route": "/js/trout/thirdparty-libs/summernote-lite.min.js",

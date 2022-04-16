@@ -34,8 +34,12 @@ class Articles(BaseHandler):
         if self.current_user:
             
             if data.get('action') in ['get',]:
-                article = self.db.articles.find_one({'meta.owner': self.current_user.get('email'), 'meta.uuid': data.get('uuid')})
-                self.write_json(article)
+                if 'uuid' in data.keys():
+                    article = self.db.articles.find_one({'meta.owner': self.current_user.get('email'), 'meta.uuid': data.get('uuid')})
+                    self.write_json(article)
+                elif 'url' in data.keys():
+                    article = self.db.articles.find_one({'meta.url': data.get('url')})
+                    self.write_json(article)
                     
             elif data.get('action') in ['create',]:
                 new_article = self.create_a_new_article_obj()
@@ -46,6 +50,7 @@ class Articles(BaseHandler):
                 article_obj_data = data['article']
                 article_obj = self.db.articles.find_one({'meta.owner': self.current_user.get('email'), 'meta.uuid': article_obj_data['meta'].get('uuid')})
                 article_obj['article']['title'] = article_obj_data['article'].get('title')
+                article_obj['article']['description'] = article_obj_data['article'].get('description')
                 article_obj['article']['content'] = article_obj_data['article'].get('content')
                 article_obj['article']['tags'] = article_obj_data['article'].get('tags', []) or []
                 
@@ -60,6 +65,8 @@ class Articles(BaseHandler):
                 self.write_json(article_obj)
                 
             elif data.get('action') in ['delete',]:
+                pass
+            elif data.get('action') in ['upload']:
                 pass
 
     
@@ -88,6 +95,7 @@ class Articles(BaseHandler):
             },
             'article': {
                 'title': '',
+                'description': '',
                 'content': self.content_default,
                 'tags': []
             },

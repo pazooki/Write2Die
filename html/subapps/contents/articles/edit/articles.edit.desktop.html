@@ -1,40 +1,40 @@
+<hr/>
+
 <div class="container-fluid rounded-border">
     <div class="row">
-        <div class="col-md-12">
-            <div class="row">
-                <div class="col-md-6">
-                    <input type="text" class="input" id="article_title" style="width:100%" placeholder="Title ...">
-                </div>
-                <div class="col-md-1">
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="article_public_switch">
-                        <label class="form-check-label" for="article_publish_switch">Public</label>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="article_autosave_switch">
-                        <label class="form-check-label" for="article_autosave_switch">Auto Save</label>
-                    </div>
-                </div>
-                <div class="col-md-3 text-end">
-                    <button class="btn btn-sm btn-danger" type="button" id="article_delete_btn">Delete</button>
-                    <button class="btn btn-sm btn-success" type="button" id="article_save_btn">Save</button>
-                </div>
+        <div class="col-md-8">
+            <div class="input-group">
+                <span class="input-group-text" id="article_title_label">Title</span>
+                <input type="text" class="form-control" placeholder="Title" aria-label="Title" aria-describedby="article_title" id="article_title">
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <input type="text" class="input" id="description" style="width:100%" placeholder="Description ...">
-                    <form method="post">
-                        <textarea id="editor" name="editordata"></textarea>
-                    </form>
-
-
-                    <!-- <div id="summernote"></div> -->
-                    <!-- <textarea id="editor">Here you can write and publish your articles.</textarea> -->
-                </div>
+            <div class="input-group">
+                <span class="input-group-text" id="article_description_label">Description</span>
+                <input type="text" class="form-control" placeholder="Description" aria-label="Description" aria-describedby="article_description" id="article_description">
+            </div>
+            <form method="post">
+                <textarea id="editor" name="editordata"></textarea>
+            </form>
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-sm btn-danger" type="button" id="article_delete_btn">Delete</button>
+            <button class="btn btn-sm btn-success" type="button" id="article_save_btn">Save</button>
+            <hr/>
+            <div id="top_bar_text">
+                <label class="form-label" for="article_public_url">Public URL:</label>
+                <a href="http://www.w3.org/2000/svg" id="article_public_url" target="_blank">Public URL</a>
+            </div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="article_public_switch">
+                <label class="form-check-label" for="article_publish_switch">Public</label>
+            </div>
+            <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="article_autosave_switch">
+                <label class="form-check-label" for="article_autosave_switch">Auto Save</label>
+            </div>
+            <div class="input-group">
+                <span class="input-group-text" id="article_tags_label">Tags</span>
+                <input type="text" class="form-control" placeholder="Tags" aria-label="Tags" aria-describedby="article_tags" id="article_tags">
             </div>
         </div>
     </div>
 </div>
-<input type="text" class="input" id="article_tags" style="width:100%" placeholder="Tags">

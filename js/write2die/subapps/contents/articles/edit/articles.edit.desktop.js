@@ -1,22 +1,4 @@
 
-function debounce(func, wait, immediate) {
-    var timeout;
-    return function () {
-        var context = this,
-            args = arguments;
-        var later = function () {
-            timeout = null;
-            if (!immediate) func.apply(context, args);
-        };
-
-        console.log('debounce')
-        var callNow = immediate && !timeout;
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-        if (callNow) func.apply(context, args);
-    };
-};
-
 export default class ArticleEdit {
 
     constructor(State) {
@@ -28,51 +10,55 @@ export default class ArticleEdit {
         ].concat(' '))
         this.keywords = this.State.Root.Services.Localization.i18n(this.descriptoin.split(' ').concat(','));
         this.currentArticleObj = null;
+        this.last_save_ts = Date.now();
+        this.autosave_threshold = 5000;
+    }
+
+    is_ready_for_autosave = () => {
+        console.log((Date.now() - this.last_save_ts), this.autosave_threshold);
+        if ((Date.now() - this.last_save_ts) >= this.autosave_threshold) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    save = () => {
+        // $('#editor').summernote('editor.saveRange');
+
+        if (this.is_ready_for_autosave()) {
+            this.saveArticle()
+            this.last_save_ts = Date.now();
+        }
     }
 
     run = () => {
         return new Promise(
             resolve => {
                 let that = this;
-
-                let debouncedSaveArticle = debounce(that.saveArticle, 300);
-
                 that.editor = this.State.SubApp.Services.Editor.create('#editor');
 
-                if (window.location.search != null) {
+                if (window.location.search == null) {
+                    alert('There is no article UUID in the url.')
+                } else {
                     let uuid = this.State.Root.Services.Session.getParam('uuid');
                     console.log('queryParam: ', uuid);
                     this.State.SubApp.Services.Articles.getArticle(uuid).then(article_obj => {
                         that.currentArticleObj = article_obj;
                         that.loadEditor(that.currentArticleObj);
-                        console.log(that.currentArticleObj);
-
                         if (that.currentArticleObj.meta.auto_save) {
                             that.editor.on('summernote.change', function (we, contents, $editable) {
-                                debouncedSaveArticle()
+                                console.log('AutoSave Is On...');
+                                that.save();
                             });
                         }
                     });
                     document.getElementById('article_save_btn').addEventListener('click', function () {
-                        debouncedSaveArticle()
+                        that.save();
                     });
-
-                } else {
-                    alert('There is no article UUID in the url.')
                 }
-
-                // that.editor.onChange = function (contents, core) { 
-                //     console.log('Contents.onChange: ', contents)
-                //     that.currentArticleObj.article.content = contents;
-                //     that.saveArticle();
-                //  }
-
-                //  that.editor.onSave = function (contents, core) { 
-                //     console.log('Contents.onSave: ', contents)
-                //      that.currentArticleObj.article.content = contents;
-                //      that.saveArticle();
-                //   }
-                document.getElementById('article_title').addEventListener('change', this.save);
+                document.getElementById('article_title').addEventListener('change', that.save);
+                document.getElementById('article_description').addEventListener('change', that.save);
                 return resolve('Article.Edit Successful');
             },
             reject => {
@@ -85,24 +71,27 @@ export default class ArticleEdit {
         console.log('saveArticle.')
         let that = this;
         that.currentArticleObj.article.title = document.getElementById('article_title').value;
+        that.currentArticleObj.article.description = document.getElementById('article_description').value;
         that.currentArticleObj.article.content = that.editor.summernote('code');
         that.currentArticleObj.article.tags = document.getElementById('article_tags').value || [];
 
-        var isAutoSave = document.getElementById('article_autosave_switch').checked;
+        let autoSaveElement = document.getElementById('article_autosave_switch');
+        var isAutoSave = autoSaveElement.checked;
         if (isAutoSave) {
-            document.getElementById('article_autosave_switch').checked = true;
+            autoSaveElement.checked = true;
             that.currentArticleObj.meta.auto_save = true;
         } else {
-            document.getElementById('article_autosave_switch').checked = false;
+            autoSaveElement.checked = false;
             that.currentArticleObj.meta.auto_save = false;
         }
 
-        var isPublic = document.getElementById('article_public_switch').checked;
+        let publicElement = document.getElementById('article_public_switch')
+        var isPublic = publicElement.checked;
         if (isPublic) {
-            document.getElementById('article_public_switch').checked = true;
+            publicElement.checked = true;
             that.currentArticleObj.meta.public = true;
         } else {
-            document.getElementById('article_public_switch').checked = false;
+            publicElement.checked = false;
             that.currentArticleObj.meta.public = false;
         }
 
@@ -110,17 +99,34 @@ export default class ArticleEdit {
 
         that.State.SubApp.Services.Articles.saveArticle(that.currentArticleObj).then(article_obj => {
             that.currentArticleObj = article_obj;
-            that.loadEditor(that.currentArticleObj);
         });
 
         that.State.Root.Services.Component.toast('Article is saved.');
+        that.last_saved = Date.now();
     }
 
     loadEditor = (article_obj) => {
         document.getElementById('article_title').value = article_obj.article.title;
+        document.getElementById('article_description').value = article_obj.article.description;
         this.editor.summernote('code', article_obj.article.content);
         document.getElementById('article_public_switch').checked = article_obj.meta.public;
         document.getElementById('article_autosave_switch').checked = article_obj.meta.auto_save;
+
+
+        document.getElementById('article_tags').value = this.currentArticleObj.article.tags;
+
+        let public_url_element = document.getElementById('article_public_url')
+        let abs_public_url = 'http://localhost/contents/articles/view/?article=';
+        if (article_obj.meta.public){
+            public_url_element.style.visibility = 'visible';
+            document.getElementById('top_bar_text').style.visibility = 'visible';
+            public_url_element.href = abs_public_url + article_obj.meta.url;
+            public_url_element.innerText = article_obj.article.title;
+        } else {
+            public_url_element.style.visibility = 'hidden';
+            document.getElementById('top_bar_text').style.visibility = 'hidden';
+        }
+
     }
 
 }

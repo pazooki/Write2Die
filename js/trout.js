@@ -28,6 +28,8 @@ export class TroutJS extends Trout {
         this.State.Root.Services.Auth = new this.State.Root.Modules.RootServices.Auth(this.State);
         this.State.Root.Services.Network = new this.State.Root.Modules.RootServices.Network(this.State);
 
+        this.State.Root.Services.Fonts = new this.State.Root.Modules.RootServices.Fonts(this.State);
+
         this.State.Root.Services.Component = new this.State.Root.Modules.RootServices.Component(this.State);
         this.State.Root.Services.Messaging = new this.State.Root.Modules.RootServices.Messaging(this.State);
         this.State.Root.Services.Tracker = new this.State.Root.Modules.RootServices.Tracker(this.State);

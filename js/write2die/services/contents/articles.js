@@ -3,6 +3,10 @@ export class Articles {
         this.State = State;
     }
 
+    getArticleByTitleUrl = (title_url) => {
+        return this.State.Root.Services.Data.API.Post(this.State.Routes.API.articles_action,  {'action': 'get', 'url': title_url}, {});
+    }
+
     requestToCreateANewArticle = () => {
         return this.State.Root.Services.Data.API.Post(this.State.Routes.API.articles_action,  {'action': 'create'}, {});
     }
