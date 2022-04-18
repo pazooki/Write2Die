@@ -4,7 +4,7 @@ export class Editor {
         this.editor_node = null;
     }
     
-    create = (element_id, callback) => { 
+    create = (element_id) => { 
         this.editor_node = $(element_id);
 
         this.editor_node.summernote({
@@ -20,17 +20,17 @@ export class Editor {
                 ['table', ['table']],
                 ['insert', ['link', 'picture', 'video']],
                 ['view', ['fullscreen', 'codeview', 'help']],
-            ],
-            callbacks: {
-                onImageUpload: function(image) {
-                    this.uploadImage(image[0]);
-                }
-            }
+            ]
+            // callbacks: {
+            //     onImageUpload: function(files, editor, welEditable) {
+            //         this.sendFile(files[0], editor, welEditable);
+            //     }
+            // }
         });
         return this.editor_node;
     }
     
-    uploadImage = (image) => {
+    sendFile(file, editor, welEditable) {
         var data = new FormData();
         data.append("image", image);
         let name = this.editor_node

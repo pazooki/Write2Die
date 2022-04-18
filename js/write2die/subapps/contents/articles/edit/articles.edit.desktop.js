@@ -53,9 +53,15 @@ export default class ArticleEdit {
                             });
                         }
                     });
-                    document.getElementById('article_save_btn').addEventListener('click', function () {
-                        that.save();
+                    document.getElementById('article_save_btn').addEventListener('click', that.save);
+
+                    that.editor.on('summernote.image.upload', function(we, files) {
+                        // upload image to server and create imgNode...
+                        console.log('editor.image.upload', we, files);
+                        that.editor.summernote('insertNode', imgNode);
                     });
+                      
+                      
                 }
                 document.getElementById('article_title').addEventListener('change', that.save);
                 document.getElementById('article_description').addEventListener('change', that.save);

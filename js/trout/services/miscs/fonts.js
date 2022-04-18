@@ -4,8 +4,12 @@ export class Fonts {
     }
 
     setupFonts = () => {
-        let ny = new FontFace('Pacifico', 'url(https://fonts.gstatic.com/s/pacifico/v21/FwZY7-Qmy14u9lezJ-6H6MmBp0u-.woff2)');
+        
+        let ACaslonProItalic = new FontFace('ACaslonPro-Italic', 'url(http://localhost/static/fonts/ACaslonPro-Italic.otf)');
+        let ny = new FontFace('NY Irvin', 'url(http://localhost/static/fonts/NY Irvin.ttf)');
+        ACaslonProItalic.load();
         ny.load();
+        document.fonts.add(ACaslonProItalic);
         document.fonts.add(ny);
     }
 }
