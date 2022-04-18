@@ -25,7 +25,8 @@ def setup_logger(logger_name, log_file, level=logging.INFO):
 PROJECT_ROOT = os.path.dirname(os.path.realpath(__file__))
 FRONTEND_ROOT = os.path.dirname(os.path.abspath(os.path.join(PROJECT_ROOT, '..', 'frontend')))
 DATA_PATH = os.path.abspath(os.path.join('/home/mehrdadpazooki/', 'data/'))
-SITE_ROOT = os.path.join(PROJECT_ROOT, '../frontend')
+FILES_PATH = os.path.abspath('./')
+SITE_ROOT = os.path.join(PROJECT_ROOT, '../')
 COMPANIES_NAME_PATH = os.path.join(PROJECT_ROOT, 'libs/tse/data/symbols_name.json')
 
 STATIC_FILES_PATH = os.path.abspath(os.path.join(PROJECT_ROOT, 'static_files'))

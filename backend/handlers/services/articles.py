@@ -65,9 +65,15 @@ class Articles(BaseHandler):
                 self.write_json(article_obj)
                 
             elif data.get('action') in ['delete',]:
-                pass
+                if 'uuid' in data.keys():
+                    self.db.articles.delete_one({'meta.owner': self.current_user.get('email'), 'meta.uuid': data.get('uuid')})
+                    self.write_json({'msg': 'Article deleted.'})
             elif data.get('action') in ['upload']:
-                pass
+                file1 = self.request.files['file1'][0]
+                original_fname = file1['filename']
+                with open("uploads/" + original_fname, 'wb') as output_file:
+                    output_file.write(file1['body'])
+                self.finish("file " + original_fname + " is uploaded")
 
     
     @property
