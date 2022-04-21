@@ -21,33 +21,7 @@ export class Editor {
                 ['insert', ['link', 'picture', 'video']],
                 ['view', ['fullscreen', 'codeview', 'help']],
             ]
-            // callbacks: {
-            //     onImageUpload: function(files, editor, welEditable) {
-            //         this.sendFile(files[0], editor, welEditable);
-            //     }
-            // }
         });
         return this.editor_node;
-    }
-    
-    sendFile(file, editor, welEditable) {
-        var data = new FormData();
-        data.append("image", image);
-        let name = this.editor_node
-        $.ajax({
-            url: 'Your url to deal with your image',
-            cache: false,
-            contentType: false,
-            processData: false,
-            data: data,
-            type: "post",
-            success: function(url) {
-                var image = $('<img>').attr('src', 'http://' + url);
-                $('#summernote').summernote("insertNode", image[0]);
-            },
-            error: function(data) {
-                console.log(data);
-            }
-        });
     }
 }

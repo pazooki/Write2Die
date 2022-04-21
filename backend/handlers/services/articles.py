@@ -47,6 +47,7 @@ class Articles(BaseHandler):
                 self.write_json(new_article)
                     
             elif data.get('action') in ['update',]:
+                print('Article.Action == update')
                 article_obj_data = data['article']
                 article_obj = self.db.articles.find_one({'meta.owner': self.current_user.get('email'), 'meta.uuid': article_obj_data['meta'].get('uuid')})
                 article_obj['article']['title'] = article_obj_data['article'].get('title')

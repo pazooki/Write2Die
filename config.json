@@ -37,24 +37,6 @@
         "/home/profile/": {
             "filename": "profile"
         },
-        "/contents/articles/get/": {
-            "filename": "articles.get"
-        },
-        "/contents/articles/post/": {
-            "filename": "articles.post"
-        },
-        "/contents/videos/post/": {
-            "filename": "videos.post"
-        },
-        "/contents/videos/get/": {
-            "filename": "videos.get"
-        },
-        "/contents/duels/post/": {
-            "filename": "duels.post"
-        },
-        "/contents/duels/get/": {
-            "filename": "duels.get"
-        },
         "/contents/voices/post/": {
             "filename": "voices.post"
         },
@@ -66,6 +48,9 @@
         },
         "/contents/articles/view/": {
             "filename": "articles.view"
+        },
+        "/contents/articles/list/": {
+            "filename": "articles.list"
         }
     },
     "routes": {

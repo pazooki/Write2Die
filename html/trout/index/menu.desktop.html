@@ -12,20 +12,25 @@
     <div class="collapse navbar-collapse flex-grow-1 text-right" id="desktopMenu">
         <ul class="navbar-nav ms-auto flex-nowrap">
             <li class="nav-item">
-                <a class="nav-link m-2 menu-item subapp" subapp="/contents/articles/get/">Articles</a>
+                <a class="nav-link m-2 menu-item subapp" subapp="/contents/articles/list/">Articles</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link m-2 menu-item subapp" subapp="/contents/duels/get/">Duels</a>
+                <a class="nav-link m-2 menu-item subapp" subapp="/contents/duels/view/">Duels</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link m-2 menu-item subapp" subapp="/contents/voices/get/">Voices</a>
+            <li class="nav-item if_signed_in">
+                <div class="dropdown dropstart">
+                    
+                    <button class="btn btn-sm btn-primary dropdown-toggle nav-link m-2 menu-item" type="button" id="dropdownMenuItem" data-bs-toggle="dropdown" aria-expanded="false">My Account</button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuItem">
+                    <li><a subapp="/home/profile/" class="dropdown-item nav-link m-2 menu-item subapp" id="signed_in_user_profile_button" tabindex="-1" role="button" aria-disabled="true"> # TO BE NAME #</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a subapp="/contents/articles/mine" class="dropdown-item nav-link m-2 menu-item subapp">My Articles</a></li>
+                    <li><a subapp="/contents/duels/mine" class="dropdown-item nav-link m-2 menu-item subapp">My Duels</a></li>
+                    </ul>
+                </div>
             </li>
-            <li class="nav-item">
-                <a class="nav-link m-2 menu-item subapp" subapp="/contents/videos/get/">Videos</a>
-            </li>
-            <li class="nav-item">
-                <a subapp="/home/access/" class="nav-link m-2 menu-item btn btn-info btn-sm subapp if_signed_out" tabindex="-1" role="button" aria-disabled="true">Members Acccess</a>
-                <a subapp="/home/profile/" class="nav-link m-2 menu-item btn btn-info btn-sm subapp if_signed_in" id="signed_in_user_profile_button" tabindex="-1" role="button" aria-disabled="true"> # TO BE NAME #</a>
+            <li class="nav-item if_signed_out">
+                <a subapp="/home/access/" class="nav-link m-2 menu-item btn btn-info btn-sm subapp" tabindex="-1" role="button" aria-disabled="true">Members Acccess</a>
             </li>
         </ul>
     </div>
