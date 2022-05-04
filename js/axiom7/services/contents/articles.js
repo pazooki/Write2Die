@@ -4,7 +4,7 @@ export class Articles {
     }
 
     getArticleByTitleUrl = (title_url) => {
-        return this.State.Root.Services.Data.API.Post(this.State.Routes.API.articles_action,  {'action': 'get', 'url': title_url}, {});
+        return this.State.Root.Services.Data.API.Post(this.State.Routes.API.articles_action,  {'action': 'view', 'url': title_url}, {});
     }
 
     requestToCreateANewArticle = () => {
@@ -20,6 +20,9 @@ export class Articles {
         return this.State.Root.Services.Data.API.Post(this.State.Routes.API.articles_action,  {'action': 'get', 'uuid': uuid}, {});
     }
 
+    getArticles = (query) => {
+        return this.State.Root.Services.Data.API.Post(this.State.Routes.API.articles_action,  {'action': 'get', ...query}, {});
+    }
 
     getArticleByUrl = (url, callback) => {
         return this.State.Root.Services.Data.API.Post(

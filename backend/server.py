@@ -6,8 +6,8 @@ import tornado.web
 from config import setup_logger
 import logging
 import os
-setup_logger('Write2Die.server', os.path.join('/home/mehrdadpazooki/', 'Write2Die.server.log'))
-log = logging.getLogger('Write2Die.server')
+setup_logger('Axiom7.server', os.path.join('/home/mehrdadpazooki/', 'Axiom7.server.log'))
+log = logging.getLogger('Axiom7.server')
 
 from config import db, tornado_settings
 
@@ -88,7 +88,7 @@ routing = [
 ]
 
 # For GUNICORN
-# write2die_app = tornado.web.Application(
+# axiom7_app = tornado.web.Application(
 #     routing, 
 #     tornado_settings, 
 #     # login_url=tornado_settings.get('login_url'),
@@ -97,7 +97,7 @@ routing = [
 # )
 
 
-def write2die_app():
+def axiom7_app():
     return tornado.web.Application(
         routing,
         tornado_settings,
@@ -106,6 +106,6 @@ def write2die_app():
     )
 
 if __name__ == "__main__":
-    app = write2die_app()
+    app = axiom7_app()
     app.listen(8181)
     tornado.ioloop.IOLoop.current().start()

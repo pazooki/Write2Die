@@ -191,7 +191,7 @@ export class Trout {
                     return this.State.Root.Services.Data.API.Get(resource, {}).then(
                         content => {
                             console.log('loading.. ', resource)
-                            console.log('loading content.. ', content)
+                            // console.log('loading content.. ', content)
                             document.getElementById(resource.attributes.placementTag).innerHTML = content;
                             return resolve('Loaded HTML: ' + resource.route);
                         },

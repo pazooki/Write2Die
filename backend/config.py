@@ -45,7 +45,7 @@ tornado_settings = {
     "serve_traceback": True
 }
 
-logging.basicConfig(filename=os.path.join('/home/mehrdadpazooki/', 'write2die-tornado.log'), level=logging.INFO)
+logging.basicConfig(filename=os.path.join('/home/mehrdadpazooki/', 'axiom7-tornado.log'), level=logging.INFO)
 log = logging
 
 mongo_cli = MongoClient('mongodb://localhost')

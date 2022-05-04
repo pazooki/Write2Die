@@ -22,7 +22,7 @@
                 }
             }
         },
-        "appName": "write2die",
+        "appName": "axiom7",
         "site": "http://localhost",
         "server": "http://localhost",
         "defaultSubApp": "/home/home/"
@@ -51,6 +51,9 @@
         },
         "/contents/articles/list/": {
             "filename": "articles.list"
+        },
+        "/contents/articles/mine/": {
+            "filename": "articles.mine"
         }
     },
     "routes": {
@@ -62,7 +65,13 @@
         },
         "SubApps": {
             "articles.edit": {
-                "route": "/contents/articles/edit/",
+                "route": "/contents/articles/edit/?article=",
+                "cache": {
+                    "validityTime": 0
+                }
+            },
+            "articles.view": {
+                "route": "/contents/articles/view/?article=",
                 "cache": {
                     "validityTime": 0
                 }

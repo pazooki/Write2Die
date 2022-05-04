@@ -110,6 +110,54 @@ export class Component{
         // )
     }
 
+    create_card = (img, title, subtitle, text, action) => {
+        //   <div class="card">
+        //     <img src="..." class="card-img-top" alt="...">
+        //     <div class="card-body">
+        //       <h5 class="card-title">Card title</h5>
+        //       <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+        //       <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        //       <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        //     </div>
+        //   </div>
+        let card = document.createElement('div');
+        card.classList.add('card')
+
+        card.style.width = "18rem";
+
+        if (img) {
+            card.appendChild(img);
+        }
+
+        let card_body = document.createElement('div');
+        card_body.classList.add('card-body')
+
+        let card_title = document.createElement('h5');
+        card_title.classList.add('card-title'); 
+        card_title.innerHTML = title
+
+        card_body.appendChild(card_title);
+
+        let card_subtitle = document.createElement('h6');
+        card_subtitle.classList.add('card-subtitle', 'mb-2', 'text-muted');
+        card_subtitle.innerHTML = subtitle;
+        card_body.appendChild(card_subtitle);
+
+        let card_text = document.createElement('p');
+        card_text.classList.add('card-text');
+        card_text.innerHTML = text;
+
+        card_body.appendChild(card_text);
+
+        if (action) {
+            card_body.appendChild(action);
+        }
+
+        card.appendChild(card_body);
+
+        return card;
+    }
+
     elementExistsById = (element_id) => {
         try { // TODO el in document
             return document.getElementById(element_id) !== null;

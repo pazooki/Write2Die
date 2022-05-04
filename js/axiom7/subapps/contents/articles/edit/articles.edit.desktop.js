@@ -14,6 +14,76 @@ export default class ArticleEdit {
         this.autosave_threshold = 5000;
     }
 
+    run = () => {
+        return new Promise(
+            resolve => {
+                let that = this;
+                that.editor = this.State.SubApp.Services.Editor.create('#editor');
+                if (!window.location.search) { 
+                    // Create A New Article Backend Object
+                    that.createNewArticle();
+                } else {
+                    that.editThisArticle();
+                }
+                that.setupEvents();
+                return resolve('Article.Edit Successful');
+            },
+            reject => {
+                return reject(new Error('Failed to load'));
+            }
+        );
+    }
+
+    createNewArticle = () => {
+        let that = this;
+        document.getElementById('article_publish_btn').style.visibility = 'visible';
+        document.getElementById('article_unpublish_btn').style.visibility = 'hidden';
+        document.getElementById('article_publishing_section').style.visibility = 'hidden';
+
+        this.State.SubApp.Services.Articles.requestToCreateANewArticle().then(article_obj => {
+            console.log('requestToCreateANewArticle: ', article_obj);
+            that.load(article_obj);
+        })
+    }
+
+    editThisArticle = () => {
+        let article = this.State.Root.Services.Session.getParam('article');
+        console.log('queryParam: ', article);
+        this.State.SubApp.Services.Articles.getArticleByTitleUrl(article).then(article_obj => {
+            that.load(article_obj);
+            if (article_obj.meta.public){
+                document.getElementById('article_publish_btn').style.visibility = 'hidden';
+                document.getElementById('article_unpublish_btn').style.visibility = 'visible';
+            } else {
+                document.getElementById('article_publish_btn').style.visibility = 'visible';
+                document.getElementById('article_unpublish_btn').style.visibility = 'hidden';
+            }
+        });
+
+        document.getElementById('article_save_btn').addEventListener('click', that.save);
+    }
+
+    setupEvents = () => {
+        document.getElementById('article_title').addEventListener('change', this.save);
+        document.getElementById('article_description').addEventListener('change', this.save);
+        // document.getElementById('article_public_switch').addEventListener('change', this.save);
+    }
+
+    load = (article_obj) => {
+        let that = this;
+        if (article_obj === null) {
+            alert('there is no valid article for this address.')
+        }
+        that.currentArticleObj = article_obj;
+        that.loadEditor(that.currentArticleObj);
+        if (that.currentArticleObj.meta.auto_save) {
+            that.editor.on('summernote.change', function (we, contents, $editable) {
+                console.log('AutoSave Is On...');
+                that.save();
+            });
+        }
+    }
+    
     is_ready_for_autosave = () => {
         console.log((Date.now() - this.last_save_ts), this.autosave_threshold);
         if ((Date.now() - this.last_save_ts) >= this.autosave_threshold) {
@@ -24,45 +94,10 @@ export default class ArticleEdit {
     }
 
     save = () => {
-        // $('#editor').summernote('editor.saveRange');
-
         if (this.is_ready_for_autosave()) {
             this.saveArticle()
             this.last_save_ts = Date.now();
         }
-    }
-
-    run = () => {
-        return new Promise(
-            resolve => {
-                let that = this;
-                that.editor = this.State.SubApp.Services.Editor.create('#editor');
-
-                if (window.location.search == null) {
-                    alert('There is no article UUID in the url.')
-                } else {
-                    let uuid = this.State.Root.Services.Session.getParam('uuid');
-                    console.log('queryParam: ', uuid);
-                    this.State.SubApp.Services.Articles.getArticle(uuid).then(article_obj => {
-                        that.currentArticleObj = article_obj;
-                        that.loadEditor(that.currentArticleObj);
-                        if (that.currentArticleObj.meta.auto_save) {
-                            that.editor.on('summernote.change', function (we, contents, $editable) {
-                                console.log('AutoSave Is On...');
-                                that.save();
-                            });
-                        }
-                    });
-                    document.getElementById('article_save_btn').addEventListener('click', that.save);
-                }
-                document.getElementById('article_title').addEventListener('change', that.save);
-                document.getElementById('article_description').addEventListener('change', that.save);
-                return resolve('Article.Edit Successful');
-            },
-            reject => {
-                return reject(new Error('Failed to load'));
-            }
-        );
     }
 
     saveArticle = () => {

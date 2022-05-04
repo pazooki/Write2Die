@@ -33,13 +33,17 @@ class Articles(BaseHandler):
         data = tornado.escape.json_decode(self.request.body) or {}
         if self.current_user:
             
-            if data.get('action') in ['get',]:
+            if data.get('action') in ['view']:
                 if 'uuid' in data.keys():
                     article = self.db.articles.find_one({'meta.owner': self.current_user.get('email'), 'meta.uuid': data.get('uuid')})
                     self.write_json(article)
                 elif 'url' in data.keys():
                     article = self.db.articles.find_one({'meta.url': data.get('url')})
                     self.write_json(article)
+                elif 'query' in data.keys():
+                    if data['query'] in ['mine',]:
+                        articles = self.db.articles.find({'meta.owner': self.current_user.get('email')})
+                        self.write_json([article for article in articles])
                     
             elif data.get('action') in ['create',]:
                 new_article = self.create_a_new_article_obj()
@@ -59,9 +63,10 @@ class Articles(BaseHandler):
                 article_obj['meta']['public'] = article_obj_data['meta'].get('public')
                 article_obj['meta']['auto_save'] = article_obj_data['meta'].get('auto_save')
                 article_obj['meta']['last_modified_at'] = article_obj_data['meta'].get('last_modified_at') or datetime.now()
-                article_obj['meta']['published_at'] = article_obj_data['meta'].get('published_at') or None
                 article_obj['meta']['url'] = article_obj_data['meta'].get('url') or self.build_unique_url(article_obj_data['article'].get('title'))
-                
+                if article_obj_data['meta'].get('public'):
+                    article_obj['meta']['published_at'] = article_obj_data['meta'].get('published_at') or datetime.now()
+                    
                 self.db.articles.update_one({'meta.uuid': article_obj['meta']['uuid']}, {"$set": article_obj})
                 self.write_json(article_obj)
                 
@@ -69,12 +74,6 @@ class Articles(BaseHandler):
                 if 'uuid' in data.keys():
                     self.db.articles.delete_one({'meta.owner': self.current_user.get('email'), 'meta.uuid': data.get('uuid')})
                     self.write_json({'msg': 'Article deleted.'})
-            elif data.get('action') in ['upload']:
-                file1 = self.request.files['file1'][0]
-                original_fname = file1['filename']
-                with open("uploads/" + original_fname, 'wb') as output_file:
-                    output_file.write(file1['body'])
-                self.finish("file " + original_fname + " is uploaded")
 
     
     @property

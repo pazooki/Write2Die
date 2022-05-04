@@ -15,7 +15,7 @@ export default class SubAppBase {
             resolve => {
                 this.State.Root.Memory.test = 'passed from Home';
                 // this.State.Root.Services.Search.setupSearchAutoComplete('searchDataListCenterOptions', 'searchDataListCenter');
-                return resolve('This is a template subapp script');
+                return resolve('This is a template subapp script (mobile version)');
             }, 
             reject => {
                 return reject(new Error('Failed to load'));
@@ -23,3 +23,4 @@ export default class SubAppBase {
         );
     }
 }
+

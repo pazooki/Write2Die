@@ -269,4 +269,4 @@ this.State.Root.Services.Localization.i18n('Here is your content to be translate
 ```
 
 ### Step 4: Add Styling for each page
-[TO BE COMPLETED]# Write2Die
+[TO BE COMPLETED]
